@@ -179,3 +179,39 @@ body {
     overflow-y: auto;
   }
 }
+
+.card-login {
+  width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: #fff; /* Adicionei um fundo branco */
+}
+
+.card-login h1 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center; /* Centralizei o título */
+}
+
+.card-login form {
+  text-align: center; /* Centralizei o formulário */
+}
+
+.card-login .btn-register {
+  background-color: #28a745; /* Cor para o botão de registro */
+}
+
+.card-login .btn-register:hover {
+  background-color: #218838;
+}
+
+.card-login {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

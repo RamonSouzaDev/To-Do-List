@@ -1,9 +1,9 @@
 <template>
-  <div class="card">
+  <div class="card card-login">
     <div class="card-header">Registrar</div>
     <div class="card-body">
       <form @submit.prevent="saveData">
-        <label for="name">Nome completo </label>
+        <label for="name">Nome completo</label>
         <input type="text" v-model="student.name" name="name" id="name" class="input" />
 
         <label for="email">E-mail</label>
@@ -22,6 +22,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import axios from 'axios';

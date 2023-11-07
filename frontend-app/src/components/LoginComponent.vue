@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card card-login">
     <h1 class="card-header">Login</h1>
     <form @submit.prevent="login">
       <label for="email">Email:</label>
@@ -17,6 +17,7 @@
     </form>
   </div>
 </template>
+
 
 <script>
 import axios from 'axios';
