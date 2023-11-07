@@ -1,14 +1,14 @@
 <template>
-  <div>
-    <h1>Login</h1>
+  <div class="card">
+    <h1 class="card-header">Login</h1>
     <form @submit.prevent="login">
       <label for="email">Email:</label>
-      <input type="email" id="email" v-model="formData.email" required>
+      <input type="email" id="email" class="input" v-model="formData.email" required>
       <br>
       <label for="password">Password:</label>
-      <input type="password" id="password" v-model="formData.password" required>
+      <input type="password" id="password" class="input" v-model="formData.password" required>
       <br>
-      <button type="submit">Login</button>
+      <button type="submit" class="btn">Login</button>
     </form>
   </div>
 </template>
@@ -30,6 +30,9 @@ export default {
       try {
         const response = await axios.post('http://127.0.0.1:8000/api/login', this.formData);
         console.log('Usuário autenticado:', response.data);
+        localStorage.setItem('token', response.data.access_token);
+
+        this.$emit('login-success');
         this.$router.push('/dashboard');
       } catch (error) {
         console.error('Erro de autenticação:', error);
@@ -38,3 +41,4 @@ export default {
   }
 };
 </script>
+
