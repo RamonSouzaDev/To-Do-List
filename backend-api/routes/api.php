@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,6 @@ Route::middleware('auth:api')->group(function () {
         return $request->user();
     });
     Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
+    
+    Route::apiResource('tasks', TaskController::class);
 });
