@@ -4,15 +4,16 @@
       <h2>Lista de Tarefas</h2>
 
       <div class="form-group">
-        <input type="text" class="form-control" v-model="search" placeholder="Pesquisar Tarefas" @input="searchTasks" />
+        <input type="text" class="form-control custom-input" v-model="search" placeholder="Pesquisar Tarefas" @input="searchTasks" />
       </div>
+      <button class="btn btn-primary custom-button" @click="addNewTask">Adicionar Tarefa</button>
 
-      <table class="table table-bordered">
+      <table class="table custom-table">
         <thead>
           <tr>
-            <th>Title</th>
-            <th>Completed</th>
-            <th>User ID</th>
+            <th>Título</th>
+            <th>Concluída</th>
+            <th>Usuário</th>
           </tr>
         </thead>
         <tbody>
@@ -36,6 +37,7 @@
 
 <script>
 import axios from 'axios';
+import '../assets/custom.css';
 
 export default {
   data() {
@@ -70,6 +72,8 @@ export default {
     searchTasks() {
       this.currentPage = 1;
       this.fetchTasks(1);
+    },
+    addNewTask() {
     },
   },
   created() {

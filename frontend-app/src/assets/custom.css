@@ -215,3 +215,44 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table th, .custom-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.custom-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.custom-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.custom-table tr:hover {
+  background-color: #ddd;
+}
+
+.custom-input {
+  width: 20%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.custom-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.custom-button {
+  float: right;
+  margin-top: -40px;
+}
