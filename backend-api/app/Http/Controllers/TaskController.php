@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use App\Http\Requests\CreateTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 
 class TaskController extends Controller
 {
@@ -18,21 +20,21 @@ class TaskController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param CreateTaskRequest $request
      * @return JsonResponse
      */
-    public function store(Request $request): JsonResponse
+    public function store(CreateTaskRequest $request): JsonResponse
     {
         $task = Task::create($request->all());
         return response()->json($task, 201);
     }
 
     /**
-     * @param Request $request
+     * @param UpdateTaskRequest $request
      * @param Task $task
      * @return JsonResponse
      */
-    public function update(Request $request, Task $task): JsonResponse
+    public function update(UpdateTaskRequest $request, Task $task): JsonResponse
     {
         $task->update($request->all());
         return response()->json($task, 200);
