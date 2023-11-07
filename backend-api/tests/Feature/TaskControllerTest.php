@@ -23,7 +23,6 @@ class TaskControllerTest extends TestCase
         $this->actingAs($user, 'api');
 
         $response = $this->post('/api/tasks', [
-            'user_id' => $user->id,
             'title' => 'Nova Tarefa',
             'completed' => false,
         ]);
@@ -46,7 +45,7 @@ class TaskControllerTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user, 'api');  
 
-        $task = Task::factory()->create(['user_id' => $user->id]);
+        $task = Task::factory()->create();
 
         $response = $this->put("/api/tasks/{$task->id}", [
             'title' => 'Tarefa Atualizada',
@@ -71,7 +70,7 @@ class TaskControllerTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user, 'api');
 
-        $task = Task::factory()->create(['user_id' => $user->id]);
+        $task = Task::factory()->create();
 
         $response = $this->delete("/api/tasks/{$task->id}");
 
@@ -89,7 +88,7 @@ class TaskControllerTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user, 'api');
 
-        $task = Task::factory()->create(['user_id' => $user->id, 'completed' => false]);
+        $task = Task::factory()->create(['completed' => false]);
 
         $response = $this->put("/api/tasks/{$task->id}/complete");
 
