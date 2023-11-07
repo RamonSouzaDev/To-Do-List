@@ -36,6 +36,7 @@
 </template>
   
 <script>
+import axios from 'axios';
 import MenuDashboardView from '@/components/MenuDashboardComponent.vue';
 
 export default {
