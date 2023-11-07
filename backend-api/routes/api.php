@@ -25,4 +25,6 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
     
     Route::apiResource('tasks', TaskController::class);
+
+    Route::put('/tasks/{task}/complete', 'App\Http\Controllers\TaskController@markAsCompleted');
 });
