@@ -5,10 +5,15 @@
       <label for="email">Email:</label>
       <input type="email" id="email" class="input" v-model="formData.email" required>
       <br>
-      <label for="password">Password:</label>
+      <label for="password">Senha:</label>
       <input type="password" id="password" class="input" v-model="formData.password" required>
       <br>
-      <button type="submit" class="btn">Login</button>
+      <br>
+      <div class="button-container">
+        <button type="submit" class="btn">Login</button>
+        <span class="button-space"></span>
+        <button @click.prevent="redirectToRegister" class="btn btn-register">Registrar</button>
+      </div>
     </form>
   </div>
 </template>
@@ -37,8 +42,10 @@ export default {
       } catch (error) {
         console.error('Erro de autenticação:', error);
       }
+    },
+    redirectToRegister() {
+      this.$router.push('/register');
     }
-  }
+  },
 };
 </script>
-

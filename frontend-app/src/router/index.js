@@ -5,7 +5,7 @@ import DashboardView from '../components/DashboardComponent.vue';
 
 const routes = [
   {
-    path: '/login',
+    path: '/',
     name: 'Login',
     component: LoginView
   },

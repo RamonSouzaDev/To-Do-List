@@ -41,7 +41,7 @@ export default {
       })
         .then(() => {
           localStorage.removeItem('token');
-          this.$router.push('/login');
+          this.$router.push('/');
         })
         .catch((error) => {
           console.error('Erro ao fazer logout:', error);

@@ -1,7 +1,5 @@
 <template>
   <div>
-    <router-link to="/login" v-if="!isLoggedIn">Login</router-link>
-    <router-link to="/register" v-if="!isLoggedIn">Register</router-link>
     <router-view @login-success="handleLoginSuccess"></router-view>
   </div>
 </template>
