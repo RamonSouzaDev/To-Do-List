@@ -66,4 +66,14 @@ class LoginController extends Controller
 
         return $token;
     }
+
+    public function logout()
+    {
+        $user = Auth::user();
+        $user->tokens->each(function ($token, $key) {
+            $token->delete();
+        });
+
+        return response()->json(['message' => 'Logout realizado com sucesso']);
+    }
 }
