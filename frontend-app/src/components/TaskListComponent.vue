@@ -4,7 +4,7 @@
       <h2>Lista de Tarefas</h2>
 
       <div class="form-group">
-        <input type="text" class="form-control custom-input" v-model="search" placeholder="Pesquisar Tarefas" @input="searchTasks" />
+        <input type="text" class="form-control custom-search" v-model="search" placeholder="Pesquisar Tarefas" @input="searchTasks" />
       </div>
       <button class="btn btn-primary custom-button" @click="addNewTask">Adicionar Tarefa</button>
 
@@ -20,7 +20,7 @@
           <tr v-for="task in paginatedTasks" :key="task.id">
             <td>{{ task.title }}</td>
             <td>{{ task.completed ? 'Sim' : 'Não' }}</td>
-            <td>{{ task.user_id }}</td>
+            <td>{{ task.user.name }}</td>
           </tr>
         </tbody>
       </table>
@@ -70,10 +70,11 @@ export default {
         });
     },
     searchTasks() {
-      this.currentPage = 1;
+      this.currentPage =  1;
       this.fetchTasks(1);
     },
     addNewTask() {
+      this.$router.push('/register-task');
     },
   },
   created() {
