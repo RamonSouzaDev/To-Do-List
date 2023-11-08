@@ -14,9 +14,9 @@
         <br>
         <br>
         <div class="button-container">
-          <input type="submit" value="Cadastrar" class="btn btn-success">
+          <input type="submit" value="Cadastrar" class="btn btn-register">
           <span class="button-space"></span>
-          <button @click.prevent="redirectToLogin" class="btn btn-register">Login</button>
+          <button @click.prevent="redirectToLogin" class="btn-add">Login</button>
         </div>
       </form>
     </div>

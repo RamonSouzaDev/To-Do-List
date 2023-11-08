@@ -13,20 +13,13 @@
               <input type="text" id="title" v-model="newTask.title" class="custom-input" required>
             </div>
             <div class="form-group">
-              <label for="completed">Concluída:</label>
-              <div class="form-check">
-                <input type="checkbox" id="completed" v-model="newTask.completed" class="form-check-input">
-              </div>
-            </div>
-            <div class="form-group">
               <label for="description">Descrição:</label>
               <textarea id="description" v-model="newTask.description" class="custom-textarea" rows="4"></textarea>
             </div>
-            <br>
             <div class="button-container">
-              <button type="submit" class="btn-add custom-button">Adicionar Tarefa</button>
+              <button type="submit" class="btn-register-task">Adicionar Tarefa</button>
               <span class="button-space"></span>
-              <button @click="dashboard" class="btn-add custom-button">Voltar</button>
+              <button @click="dashboard" class="btn-add">Voltar</button>
             </div>
           </form>
         </div>

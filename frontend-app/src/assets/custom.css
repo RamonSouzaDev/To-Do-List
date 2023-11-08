@@ -68,6 +68,15 @@ label {
   color: #fff;
 }
 
+.btn-register-task {
+  background-color: #28a745;
+  color: #000;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .button-space {
   width: 10px;
 }

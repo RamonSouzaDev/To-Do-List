@@ -10,9 +10,9 @@
       <br>
       <br>
       <div class="button-container">
-        <button type="submit" class="btn">Login</button>
+        <button type="submit" class="btn btn-register">Login</button>
         <span class="button-space"></span>
-        <button @click.prevent="redirectToRegister" class="btn btn-register">Registrar</button>
+        <button @click.prevent="redirectToRegister" class="btn-add">Registrar</button>
       </div>
     </form>
   </div>
