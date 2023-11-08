@@ -13,6 +13,7 @@
             <input type="checkbox" id="nav-check">
             <div class="nav-header">
                 <div class="nav-title">
+                    <img src="../assets/logo.png" alt="Logo Empresa" class="profile-image">
                     <a v-if="user" class="nav-link">Bem-vindo, {{ user.name }}</a>
                 </div>
             </div>

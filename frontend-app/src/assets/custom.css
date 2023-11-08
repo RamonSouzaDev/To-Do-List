@@ -379,3 +379,8 @@ body {
   margin-top: 5px;
   margin-left: 10px;
 }
+
+.profile-image {
+  width: 30px;
+  height: auto;
+}
