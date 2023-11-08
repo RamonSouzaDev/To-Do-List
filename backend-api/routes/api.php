@@ -27,4 +27,5 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('tasks', TaskController::class);
 
     Route::put('/tasks/{task}/complete', 'App\Http\Controllers\TaskController@markAsCompleted');
+    Route::put('/tasks/{task}/incompleted', 'App\Http\Controllers\TaskController@markAsIncompleted');
 });

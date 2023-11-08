@@ -96,4 +96,22 @@ class TaskControllerTest extends TestCase
         $this->assertDatabaseHas('tasks', ['id' => $task->id, 'completed' => true]);
     }
 
+    /**
+     * Testa a marcação de uma tarefa como incompleta.
+     *
+     * @return void
+     */
+    public function testMarkTaskAsIncompleted()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'api');
+
+        $task = Task::factory()->create(['completed' => true]);
+
+        $response = $this->put("/api/tasks/{$task->id}/incompleted");
+
+        $response->assertStatus(200);
+        $this->assertDatabaseHas('tasks', ['id' => $task->id, 'completed' => false]);
+    }
+
 }

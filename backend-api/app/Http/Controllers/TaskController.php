@@ -61,4 +61,14 @@ class TaskController extends Controller
         return response()->json($task, 200);
     }
 
+    /**
+     * @param Task $task
+     * @return JsonResponse
+     */
+    public function markAsIncompleted(Task $task): JsonResponse
+    {
+        $task->update(['completed' => false]);
+        return response()->json($task, 200);
+    }
+
 }
