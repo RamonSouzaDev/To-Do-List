@@ -46,9 +46,10 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
+        
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
+            
             $token = $this->generateToken($user);
 
             return response()->json([
