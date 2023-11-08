@@ -23,10 +23,11 @@
                             <textarea id="description" v-model="newTask.description" class="custom-textarea"
                                 rows="4"></textarea>
                         </div>
+                        <br>
                         <div class="button-container">
-                            <button type="submit" class="btn btn-primary">Adicionar Tarefa</button>
+                            <button type="submit" class="btn-add custom-button">Adicionar Tarefa</button>
                             <span class="button-space"></span>
-                            <button @click="dashboard" class="btn btn-danger">Voltar</button>
+                            <button @click="dashboard" class="btn-add custom-button">Voltar</button>
                         </div>
                     </form>
                 </div>

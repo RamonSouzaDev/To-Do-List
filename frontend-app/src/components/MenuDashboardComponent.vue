@@ -25,10 +25,10 @@
             </div>
             <div class="nav-links">
                 <a href="#" target="_blank">Home</a>
-                <a href="#" target="_blank">About</a>
-                <a href="#" target="_blank">Projects</a>
-                <a href="#" target="_blank">Contact us</a>
-                <button v-if="user" @click="logout" class="btn btn-danger">Sair</button>
+                <a href="#" target="_blank">Sobre mim</a>
+                <a href="https://www.linkedin.com/in/ramon-mendes-b44456164/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/RamonSouzaDev">GitHub</a>
+                <button v-if="user" @click="logout" class="btn">Sair</button>
             </div>
         </div>
     </body>

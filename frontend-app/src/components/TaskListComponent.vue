@@ -6,7 +6,9 @@
       <div class="form-group">
         <input type="text" class="form-control custom-search" v-model="search" placeholder="Pesquisar Tarefas" @input="searchTasks" />
       </div>
-      <button class="btn btn-primary custom-button" @click="addNewTask">Adicionar Tarefa</button>
+      <button class="btn-add custom-button" @click="addNewTask">
+        Adicionar Tarefa
+      </button>
 
       <table class="table custom-table">
         <thead>
@@ -14,6 +16,7 @@
             <th>Título</th>
             <th>Concluída</th>
             <th>Usuário</th>
+            <th>Ações</th> <!-- Adicione a nova coluna "Ações" aqui -->
           </tr>
         </thead>
         <tbody>
@@ -21,6 +24,9 @@
             <td>{{ task.title }}</td>
             <td>{{ task.completed ? 'Sim' : 'Não' }}</td>
             <td>{{ task.user.name }}</td>
+            <td>
+              <button class="btn-complete" @click="marcarComoConcluida(task)">Marcar como concluída</button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -34,7 +40,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import axios from 'axios';
 import '../assets/custom.css';
@@ -72,6 +77,23 @@ export default {
     searchTasks() {
       this.currentPage =  1;
       this.fetchTasks(1);
+    },
+    marcarComoConcluida(task) {
+    const token = localStorage.getItem('token');
+
+    axios
+      .post(`http://127.0.0.1:8000/api/tasks/${task.id}/complete`, null, {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+      })
+      .then((response) => {
+        response.data.data;
+        task.completed = true;
+      })
+      .catch((error) => {
+        console.error('Erro ao marcar a tarefa como concluída:', error);
+      });
     },
     addNewTask() {
       this.$router.push('/register-task');
