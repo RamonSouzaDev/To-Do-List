@@ -63,7 +63,7 @@ export default {
       this.currentPage = page;
       const token = localStorage.getItem('token');
       axios
-        .get(`http://127.0.0.1:8000/api/tasks?page=${page}`, {
+        .get(`http://127.0.0.1:8000/api/tasks?page=${page}&search=${this.search}`, {
           headers: {
             Authorization: 'Bearer ' + token,
           },
