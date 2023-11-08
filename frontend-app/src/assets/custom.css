@@ -419,3 +419,47 @@ p {
   line-height: 1.6;
   color: #555;
 }
+
+.page-footer {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 0; /* Reduzir a altura ajustando o valor do padding */
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-logo img {
+  max-width: 100px;
+  height: auto;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.footer-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer-social a {
+  font-size: 24px;
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+}

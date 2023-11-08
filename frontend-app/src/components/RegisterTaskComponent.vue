@@ -26,15 +26,18 @@
       </div>
     </div>
   </div>
+  <page-footer></page-footer>
 </template>
   
 <script>
 import axios from 'axios';
 import MenuDashboardView from '@/components/MenuDashboardComponent.vue';
+import PageFooterView from '@/components/PageFooterComponent.vue';
 
 export default {
   components: {
     'menu-dashboard': MenuDashboardView,
+    'page-footer': PageFooterView
   },
   data() {
     return {

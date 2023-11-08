@@ -1,0 +1,23 @@
+<template>
+    <footer class="page-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="../assets/php.jpeg" alt="Logo da Empresa" />
+                </div>
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="/contato">WhatsApp : (11) 9 6652-4351</a></li>
+                        <li><a href="/contato">E-mail : dwmom@hotmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</template>
+
+  
+  
+  
+  
+  

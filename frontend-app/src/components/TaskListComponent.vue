@@ -44,11 +44,16 @@
       <paginate v-model="currentPage" :pages="10" :range-size="1" active-color="#DCEDFF" @update:modelValue="fetchTasks(currentPage)" />
     </div>
   </div>
+  <page-footer></page-footer>
 </template>
 <script>
 import axios from 'axios';
+import PageFooterView from '@/components/PageFooterComponent.vue';
 
 export default {
+  components: {
+    'page-footer': PageFooterView
+  },
   data() {
     return {
       tasks: [],
