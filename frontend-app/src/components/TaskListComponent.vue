@@ -23,31 +23,30 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="task in paginatedTasks" :key="task.id">
+          <tr v-for="task in tasks" :key="task.id">
             <td>{{ task.title }}</td>
             <td>{{ task.completed ? 'Sim' : 'Não' }}</td>
             <td>{{ task.user.name }}</td>
             <div class="btn-delete-container">
-            <button :class="{ 'btn-complete': !task.completed, 'btn-incomplete': task.completed }"
-              @click="task.completed ? markAsInclompeted(task) : markAsCompleted(task)">
-              <span v-if="task.completed">Desmarcar como concluída</span>
-              <span v-else>Marcar como concluída</span>
-            </button>
-            <button class="btn-delete" @click="deleteTask(task)">
-              Excluir
-            </button>
-          </div>
+              <button :class="{ 'btn-complete': !task.completed, 'btn-incomplete': task.completed }"
+                @click="task.completed ? markAsInclompeted(task) : markAsCompleted(task)">
+                <span v-if="task.completed">Desmarcar como concluída</span>
+                <span v-else>Marcar como concluída</span>
+              </button>
+              <button class="btn-delete" @click="deleteTask(task)">
+                Excluir
+              </button>
+            </div>
           </tr>
         </tbody>
       </table>
 
-      <paginate :list="tasks" :per="10" :page="currentPage" @change="fetchTasks"></paginate>
+      <paginate v-model="currentPage" :pages="10" :range-size="1" active-color="#DCEDFF" @update:modelValue="fetchTasks(currentPage)" />
     </div>
   </div>
 </template>
 <script>
 import axios from 'axios';
-import '../assets/custom.css';
 
 export default {
   data() {
@@ -55,13 +54,7 @@ export default {
       tasks: [],
       search: '',
       currentPage: 1,
-      showFlash: false
     };
-  },
-  computed: {
-    paginatedTasks() {
-      return this.tasks.slice((this.currentPage - 1) * 10, this.currentPage * 10);
-    },
   },
   methods: {
     fetchTasks(page) {
@@ -74,7 +67,13 @@ export default {
           },
         })
         .then((response) => {
+          console.log("AQUI A PAGINA MANO " + page);
+          
           this.tasks = response.data.data;
+          this.tasks.slice((this.currentPage - 1) * 10, this.currentPage * 10);
+          this.tasks.forEach((task) => {
+            console.log(task.id, task.title, task.completed);
+          });
         })
         .catch((error) => {
           console.error('Erro ao buscar tarefas:', error);
