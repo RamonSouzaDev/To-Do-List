@@ -3,6 +3,7 @@ import LoginView from '../components/LoginComponent.vue';
 import RegisterView from '../components/RegisterComponent.vue';
 import DashboardView from '../components/DashboardComponent.vue';
 import RegisterTaskView from '../components/RegisterTaskComponent.vue';
+import AboutMeView from '../components/AboutMeComponent.vue'
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: '/register-task',
     name: 'Register Task',
     component: RegisterTaskView,
+  },
+  {
+    path: '/about-me',
+    name: 'About Me',
+    component: AboutMeView,
   },
 ];
 

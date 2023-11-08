@@ -25,8 +25,8 @@
                 </label>
             </div>
             <div class="nav-links">
-                <a href="#" target="_blank">Home</a>
-                <a href="#" target="_blank">Sobre mim</a>
+                <a @click="redirectToDashboard" target="_blank">Home</a>
+                <a @click="redirectToAboutMe" target="_blank">Sobre mim</a>
                 <a href="https://www.linkedin.com/in/ramon-mendes-b44456164/" target="_blank">LinkedIn</a>
                 <a href="https://github.com/RamonSouzaDev">GitHub</a>
                 <button v-if="user" @click="logout" class="btn">Sair</button>
@@ -77,6 +77,12 @@ export default {
                     console.error('Erro ao fazer logout:', error);
                 });
         },
+        redirectToDashboard() {
+            this.$router.push('/dashboard');
+        },
+        redirectToAboutMe() {
+            this.$router.push('/about-me')
+        }
     },
 };
 </script>
