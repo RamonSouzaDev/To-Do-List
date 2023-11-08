@@ -19,7 +19,7 @@
             <th>Título</th>
             <th>Concluída</th>
             <th>Usuário</th>
-            <th>Ações</th> <!-- Adicione a nova coluna "Ações" aqui -->
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -27,11 +27,16 @@
             <td>{{ task.title }}</td>
             <td>{{ task.completed ? 'Sim' : 'Não' }}</td>
             <td>{{ task.user.name }}</td>
+            <div class="btn-delete-container">
             <button :class="{ 'btn-complete': !task.completed, 'btn-incomplete': task.completed }"
               @click="task.completed ? marcarComoIncompleta(task) : marcarComoConcluida(task)">
               <span v-if="task.completed">Desmarcar como concluída</span>
               <span v-else>Marcar como concluída</span>
             </button>
+            <button class="btn-delete" @click="excluirTarefa(task)">
+              Excluir
+            </button>
+          </div>
           </tr>
         </tbody>
       </table>
@@ -129,7 +134,9 @@ export default {
         .catch((error) => {
           console.error('Erro ao marcar a tarefa como concluída:', error);
         });
-    }
+    },
+    excluirTarefa() {
+    },
   },
   created() {
     this.fetchTasks(1);
