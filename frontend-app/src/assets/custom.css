@@ -54,6 +54,15 @@ label {
   cursor: pointer;
 }
 
+.btn-incomplete {
+  background-color: #b30036;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .btn:hover {
   background-color: #b30036;
   color: #fff;

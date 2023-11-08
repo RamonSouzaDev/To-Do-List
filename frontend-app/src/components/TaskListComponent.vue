@@ -4,7 +4,8 @@
       <h2>Lista de Tarefas</h2>
 
       <div class="form-group">
-        <input type="text" class="form-control custom-search" v-model="search" placeholder="Pesquisar Tarefas" @input="searchTasks" />
+        <input type="text" class="form-control custom-search" v-model="search" placeholder="Pesquisar Tarefas"
+          @input="searchTasks" />
       </div>
       <button class="btn-add custom-button" @click="addNewTask">
         Adicionar Tarefa
@@ -24,19 +25,16 @@
             <td>{{ task.title }}</td>
             <td>{{ task.completed ? 'Sim' : 'Não' }}</td>
             <td>{{ task.user.name }}</td>
-            <td>
-              <button class="btn-complete" @click="marcarComoConcluida(task)">Marcar como concluída</button>
-            </td>
+            <button :class="{ 'btn-complete': !task.completed, 'btn-incomplete': task.completed }"
+              @click="task.completed ? marcarComoIncompleta(task) : marcarComoConcluida(task)">
+              <span v-if="task.completed">Desmarcar como concluída</span>
+              <span v-else>Marcar como concluída</span>
+            </button>
           </tr>
         </tbody>
       </table>
 
-      <paginate
-        :list="tasks"
-        :per="10"
-        :page="currentPage"
-        @change="fetchTasks"
-      ></paginate>
+      <paginate :list="tasks" :per="10" :page="currentPage" @change="fetchTasks"></paginate>
     </div>
   </div>
 </template>
@@ -75,29 +73,46 @@ export default {
         });
     },
     searchTasks() {
-      this.currentPage =  1;
+      this.currentPage = 1;
       this.fetchTasks(1);
     },
     marcarComoConcluida(task) {
-    const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token');
 
-    axios
-      .post(`http://127.0.0.1:8000/api/tasks/${task.id}/complete`, null, {
-        headers: {
-          Authorization: 'Bearer ' + token,
-        },
-      })
-      .then((response) => {
-        response.data.data;
-        task.completed = true;
-      })
-      .catch((error) => {
-        console.error('Erro ao marcar a tarefa como concluída:', error);
-      });
+      axios
+        .put(`http://127.0.0.1:8000/api/tasks/${task.id}/complete`, null, {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        })
+        .then((response) => {
+          response.data.data;
+          task.completed = true;
+        })
+        .catch((error) => {
+          console.error('Erro ao marcar a tarefa como concluída:', error);
+        });
     },
     addNewTask() {
       this.$router.push('/register-task');
     },
+    marcarComoIncompleta(task) {
+      const token = localStorage.getItem('token');
+
+      axios
+        .put(`http://127.0.0.1:8000/api/tasks/${task.id}/incompleted`, null, {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        })
+        .then((response) => {
+          response.data.data;
+          task.completed = false;
+        })
+        .catch((error) => {
+          console.error('Erro ao marcar a tarefa como concluída:', error);
+        });
+    }
   },
   created() {
     this.fetchTasks(1);
