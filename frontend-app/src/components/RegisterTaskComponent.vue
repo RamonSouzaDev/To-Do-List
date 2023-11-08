@@ -60,8 +60,12 @@ export default {
         completed: this.newTask.completed,
         description: this.newTask.description,
       };
-
-      axios.post('http://127.0.0.1:8000/api/tasks', taskData)
+      const token = localStorage.getItem('token');
+      axios.post('http://127.0.0.1:8000/api/tasks', taskData, {
+        headers: {
+                    'Authorization': 'Bearer ' + token,
+                },
+      })
         .then((response) => {
           console.log('Nova Tarefa registrada:', response.data);
 

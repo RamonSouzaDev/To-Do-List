@@ -2,6 +2,11 @@
   <div>
     <div class="container mt-4">
       <h2>Lista de Tarefas</h2>
+      <div class="container mt-4">
+        <div class="flash" v-if="showFlash">
+          Tarefa concluída com sucesso!
+        </div>
+      </div>
 
       <div class="form-group">
         <input type="text" class="form-control custom-search" v-model="search" placeholder="Pesquisar Tarefas"
@@ -48,6 +53,7 @@ export default {
       tasks: [],
       search: '',
       currentPage: 1,
+      showFlash: false
     };
   },
   computed: {
@@ -88,6 +94,10 @@ export default {
         .then((response) => {
           response.data.data;
           task.completed = true;
+          this.showFlash = true;
+          setTimeout(() => {
+            this.showFlash = false;
+          }, 3000);
         })
         .catch((error) => {
           console.error('Erro ao marcar a tarefa como concluída:', error);

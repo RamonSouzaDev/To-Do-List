@@ -215,22 +215,22 @@ body {
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  background-color: #fff; /* Adicionei um fundo branco */
+  background-color: #fff;
 }
 
 .card-login h1 {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
-  text-align: center; /* Centralizei o título */
+  text-align: center;
 }
 
 .card-login form {
-  text-align: center; /* Centralizei o formulário */
+  text-align: center;
 }
 
 .card-login .btn-register {
-  background-color: #28a745; /* Cor para o botão de registro */
+  background-color: #28a745; 
 }
 
 .card-login .btn-register:hover {
@@ -294,7 +294,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: white; /* Defina o fundo para branco */
+  background-color: white;
 }
 
 .custom-input {
@@ -313,4 +313,13 @@ body {
   border-radius: 4px;
   margin-top: 6px;
   margin-bottom: 16px;
+}
+
+.flash {
+  background-color: #28a745; 
+  color: #fff; 
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  display: none; 
 }
