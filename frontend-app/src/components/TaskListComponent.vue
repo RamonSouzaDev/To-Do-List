@@ -29,11 +29,11 @@
             <td>{{ task.user.name }}</td>
             <div class="btn-delete-container">
             <button :class="{ 'btn-complete': !task.completed, 'btn-incomplete': task.completed }"
-              @click="task.completed ? marcarComoIncompleta(task) : marcarComoConcluida(task)">
+              @click="task.completed ? markAsInclompeted(task) : markAsCompleted(task)">
               <span v-if="task.completed">Desmarcar como concluída</span>
               <span v-else>Marcar como concluída</span>
             </button>
-            <button class="btn-delete" @click="excluirTarefa(task)">
+            <button class="btn-delete" @click="deleteTask(task)">
               Excluir
             </button>
           </div>
@@ -84,7 +84,7 @@ export default {
       this.currentPage = 1;
       this.fetchTasks(1);
     },
-    marcarComoConcluida(task) {
+    markAsCompleted(task) {
       const token = localStorage.getItem('token');
 
       axios
@@ -111,7 +111,7 @@ export default {
     addNewTask() {
       this.$router.push('/register-task');
     },
-    marcarComoIncompleta(task) {
+    markAsInclompeted(task) {
       const token = localStorage.getItem('token');
 
       axios
@@ -132,10 +132,34 @@ export default {
           }, 4000);
         })
         .catch((error) => {
-          console.error('Erro ao marcar a tarefa como concluída:', error);
+          console.error('Erro ao marcar a tarefa como incompleta:', error);
         });
     },
-    excluirTarefa() {
+    deleteTask(task) {
+      const token = localStorage.getItem('token');
+
+      axios
+        .delete(`http://127.0.0.1:8000/api/tasks/${task.id}`, {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        })
+        .then((response) => {
+          response.data.data;
+          task.completed = false;
+          const notification = document.getElementById('flash-notification');
+          notification.textContent = 'A tarefa foi excluída sucesso!';
+          notification.style.display = 'block';
+
+          setTimeout(() => {
+            notification.style.display = 'none';
+          }, 4000);
+
+          this.fetchTasks(1);
+        })
+        .catch((error) => {
+          console.error('Erro ao excluir tarefa:', error);
+        });
     },
   },
   created() {
