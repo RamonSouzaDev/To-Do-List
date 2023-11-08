@@ -2,11 +2,8 @@
   <div>
     <div class="container mt-4">
       <h2>Lista de Tarefas</h2>
-      <div class="container mt-4">
-        <div class="flash" v-if="showFlash">
-          Tarefa concluída com sucesso!
-        </div>
-      </div>
+      <div id="flash-notification" class="notification" style="display: none;"></div>
+
 
       <div class="form-group">
         <input type="text" class="form-control custom-search" v-model="search" placeholder="Pesquisar Tarefas"
@@ -94,10 +91,13 @@ export default {
         .then((response) => {
           response.data.data;
           task.completed = true;
-          this.showFlash = true;
+          const notification = document.getElementById('flash-notification');
+          notification.textContent = 'A tarefa foi marcada como concluída com sucesso!';
+          notification.style.display = 'block';
+
           setTimeout(() => {
-            this.showFlash = false;
-          }, 3000);
+            notification.style.display = 'none';
+          }, 4000);
         })
         .catch((error) => {
           console.error('Erro ao marcar a tarefa como concluída:', error);
@@ -118,6 +118,13 @@ export default {
         .then((response) => {
           response.data.data;
           task.completed = false;
+          const notification = document.getElementById('flash-notification');
+          notification.textContent = 'A tarefa foi marcada como incompleta com sucesso!';
+          notification.style.display = 'block';
+
+          setTimeout(() => {
+            notification.style.display = 'none';
+          }, 4000);
         })
         .catch((error) => {
           console.error('Erro ao marcar a tarefa como concluída:', error);

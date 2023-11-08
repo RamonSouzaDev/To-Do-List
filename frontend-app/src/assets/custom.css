@@ -323,3 +323,17 @@ body {
   font-weight: bold;
   display: none; 
 }
+
+.notification {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #28a745; /* Cor de sucesso verde */
+  color: #fff; /* Cor do texto branco */
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  display: none;
+  transition: all 0.3s ease;
+}
