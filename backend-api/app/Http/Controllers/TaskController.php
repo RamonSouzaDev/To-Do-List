@@ -14,9 +14,16 @@ class TaskController extends Controller
     /**
      * @return Task[]
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        $tasks = Task::with('user')->paginate(10);
+        $query = Task::with('user');
+        
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('title', 'like', "%$search%");
+        }
+        
+        $tasks = $query->paginate(10);
         return response()->json($tasks, 200);
     }
 

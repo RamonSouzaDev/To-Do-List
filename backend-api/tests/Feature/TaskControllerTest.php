@@ -15,6 +15,7 @@ class TaskControllerTest extends TestCase
      * Testa a criação e listagem de tarefas.
      *
      * @return void
+     * @covers TaskController@store
      */
     public function testCreateAndListTasks()
     {
@@ -39,6 +40,7 @@ class TaskControllerTest extends TestCase
      * Testa a atualização de uma tarefa.
      *
      * @return void
+     * @covers TaskController@update
      */
     public function testUpdateTask()
     {
@@ -64,6 +66,7 @@ class TaskControllerTest extends TestCase
      * Testa a exclusão de uma tarefa.
      *
      * @return void
+     * @covers TaskController@delete
      */
     public function testDeleteTask()
     {
@@ -82,6 +85,7 @@ class TaskControllerTest extends TestCase
      * Testa a marcação de uma tarefa como concluída.
      *
      * @return void
+     * @covers TaskController@complete
      */
     public function testMarkTaskAsCompleted()
     {
@@ -100,6 +104,7 @@ class TaskControllerTest extends TestCase
      * Testa a marcação de uma tarefa como incompleta.
      *
      * @return void
+     * @covers TaskController@incompleted
      */
     public function testMarkTaskAsIncompleted()
     {
@@ -112,6 +117,28 @@ class TaskControllerTest extends TestCase
 
         $response->assertStatus(200);
         $this->assertDatabaseHas('tasks', ['id' => $task->id, 'completed' => false]);
+    }
+
+    /**
+     * Testa a busca de tarefas por título.
+     *
+     * @return void
+     * @covers TaskController@search
+     */
+    public function testSearchTaskByTitle()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'api');
+
+        $task = Task::factory()->create(['title' => 'Tarefa 1']);
+
+        $response = $this->getJson('/api/tasks?search=Tarefa');
+
+        $response->assertStatus(200);
+        $response->assertJsonFragment([
+            'title' => 'Tarefa 1',
+            'user_id' => $user->id,
+        ]);
     }
 
 }
