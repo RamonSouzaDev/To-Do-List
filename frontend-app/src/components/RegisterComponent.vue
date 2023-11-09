@@ -16,7 +16,7 @@
         <br>
         <br>
         <div class="button-container">
-          <input type="submit" value="Cadastrar" class="btn btn-register">
+          <input type="submit" value="Cadastrar" class="btn btn-register-task">
           <span class="button-space"></span>
           <button @click.prevent="redirectToLogin" class="btn-add">Login</button>
         </div>

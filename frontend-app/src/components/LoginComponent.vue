@@ -11,7 +11,7 @@
       <br>
       <br>
       <div class="button-container">
-        <button type="submit" class="btn btn-register">Login</button>
+        <button type="submit" class="btn-register-task">Login</button>
         <span class="button-space"></span>
         <button @click.prevent="redirectToRegister" class="btn-add">Registrar</button>
       </div>
