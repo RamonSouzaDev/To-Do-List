@@ -2,60 +2,67 @@
   <div>
     <div class="container mt-4">
       <div class="card-table">
-      <div class="task-list-container">
-        <h2>Lista de Tarefas</h2>
-        <img src="../assets/task-list-image.png" alt="Minha Foto" class="task-list" />
+        <div class="task-list-container">
+          <h2>Lista de Tarefas</h2>
+          <img src="../assets/task-list-image.png" alt="Minha Foto" class="task-list" />
+        </div>
+        <br>
+        <confirm-delete-modal :show="showModal" :task-to-delete="taskToDelete" @confirm-delete="confirmDelete"
+          @cancel-delete="cancelDelete" />
+        <div id="flash-notification" class="notification" style="display: none;"></div>
+
+
+        <div class="form-group">
+          <input type="text" class="form-control custom-search" v-model="search" placeholder="Pesquisar Tarefas"
+            @input="searchTasks" />
+
+        </div>
+        <div class="button-container-actions">
+          <button class="btn-add custom-export" @click="exportExcel">
+            Bônus: Exportar Excel
+          </button>
+          <button class="btn-add custom-button" @click="addNewTask">
+            Adicionar Tarefa
+          </button>
+        </div>
+        <br>
+        <confirm-delete-modal :show="showModal" :task-to-delete="taskToDelete" @confirm-delete="confirmDelete"
+          @cancel-delete="cancelDelete" />
+
+        <table class="table custom-table">
+          <thead>
+            <tr>
+              <th>Título</th>
+              <th>Concluída</th>
+              <th>Usuário</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="task in tasks" :key="task.id">
+              <td>{{ task.title }}</td>
+              <td>{{ task.completed ? 'Sim' : 'Não' }}</td>
+              <td>{{ task.user.name }}</td>
+              <td>
+                <div class="btn-delete-container">
+                  <button :class="{ 'btn-complete': !task.completed, 'btn-incomplete': task.completed }"
+                    @click="task.completed ? markAsInclompeted(task) : markAsCompleted(task)">
+                    <span v-if="task.completed">Desmarcar como concluída</span>
+                    <span v-else>Marcar como concluída</span>
+                  </button>
+                  <button class="btn-delete" @click="deleteTask(task)">
+                    Excluir
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <paginate v-model="currentPage" :pages="10" :range-size="1" active-color="#DCEDFF"
+          @update:modelValue="fetchTasks(currentPage)" />
       </div>
-      <br>
-      <confirm-delete-modal :show="showModal" :task-to-delete="taskToDelete" @confirm-delete="confirmDelete"
-        @cancel-delete="cancelDelete" />
-      <div id="flash-notification" class="notification" style="display: none;"></div>
-
-
-      <div class="form-group">
-        <input type="text" class="form-control custom-search" v-model="search" placeholder="Pesquisar Tarefas"
-       @input="searchTasks" />
-
-      </div>
-      <button class="btn-add custom-button" @click="addNewTask">
-        Adicionar Tarefa
-      </button>
-      <confirm-delete-modal :show="showModal" :task-to-delete="taskToDelete" @confirm-delete="confirmDelete"
-        @cancel-delete="cancelDelete" />
-      
-      <table class="table custom-table">
-        <thead>
-          <tr>
-            <th>Título</th>
-            <th>Concluída</th>
-            <th>Usuário</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="task in tasks" :key="task.id">
-            <td>{{ task.title }}</td>
-            <td>{{ task.completed ? 'Sim' : 'Não' }}</td>
-            <td>{{ task.user.name }}</td>
-            <td>
-            <div class="btn-delete-container">
-              <button :class="{ 'btn-complete': !task.completed, 'btn-incomplete': task.completed }"
-                @click="task.completed ? markAsInclompeted(task) : markAsCompleted(task)">
-                <span v-if="task.completed">Desmarcar como concluída</span>
-                <span v-else>Marcar como concluída</span>
-              </button>
-              <button class="btn-delete" @click="deleteTask(task)">
-                Excluir
-              </button>
-            </div>
-          </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <paginate v-model="currentPage" :pages="10" :range-size="1" active-color="#DCEDFF" @update:modelValue="fetchTasks(currentPage)" />
     </div>
-  </div>
   </div>
   <page-footer></page-footer>
 </template>
@@ -89,13 +96,8 @@ export default {
           },
         })
         .then((response) => {
-          console.log("AQUI A PAGINA MANO " + page);
-          
           this.tasks = response.data.data;
           this.tasks.slice((this.currentPage - 1) * 10, this.currentPage * 10);
-          this.tasks.forEach((task) => {
-            console.log(task.id, task.title, task.completed);
-          });
         })
         .catch((error) => {
           console.error('Erro ao buscar tarefas:', error);
@@ -192,6 +194,38 @@ export default {
       this.taskToDelete = null;
       this.showModal = false;
     },
+    exportExcel() {
+      const token = localStorage.getItem('token');
+
+      axios({
+        method: 'post',
+        url: `http://127.0.0.1:8000/api/tasks/export-excel`,
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+        responseType: 'blob',
+      })
+        .then((response) => {
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute('download', 'tarefas.xlsx');
+          document.body.appendChild(link);
+          link.click();
+
+          const notification = document.getElementById('flash-notification');
+          notification.textContent = 'Download de relatório realizado com sucesso!';
+          notification.style.display = 'block';
+
+          setTimeout(() => {
+            notification.style.display = 'none';
+          }, 4000);
+        })
+        .catch((error) => {
+          console.error('Erro ao realizar o download do relatório:', error);
+        });
+    },
+
   },
   created() {
     this.fetchTasks(1);

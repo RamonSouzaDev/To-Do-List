@@ -135,11 +135,11 @@ body {
   position: relative;
 }
 
-.nav > .nav-header {
+.nav>.nav-header {
   display: inline;
 }
 
-.nav > .nav-header > .nav-title {
+.nav>.nav-header>.nav-title {
   display: inline-block;
   font-size: 22px;
   color: #fff;
@@ -147,54 +147,59 @@ body {
   margin-top: 10px;
 }
 
-.nav > .nav-btn {
+.nav>.nav-btn {
   display: none;
 }
 
-.nav > .nav-links {
+.nav>.nav-links {
   display: inline;
   float: right;
   font-size: 18px;
 }
 
-.nav > .nav-links > a {
+.nav>.nav-links>a {
   display: inline-block;
   padding: 13px 10px 13px 10px;
   text-decoration: none;
   color: #efefef;
 }
 
-.nav > .nav-links > a:hover {
+.nav>.nav-links>a:hover {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.nav > #nav-check {
+.nav>#nav-check {
   display: none;
 }
 
 @media (max-width:800px) {
-  .nav > .nav-btn {
+  .nav>.nav-btn {
     display: inline-block;
     position: absolute;
     right: 0px;
     top: 0px;
   }
-  .nav > .nav-btn > label {
+
+  .nav>.nav-btn>label {
     display: inline-block;
     width: 50px;
     height: 50px;
     padding: 13px;
   }
-  .nav > .nav-btn > label:hover,.nav  #nav-check:checked ~ .nav-btn > label {
+
+  .nav>.nav-btn>label:hover,
+  .nav #nav-check:checked~.nav-btn>label {
     background-color: rgba(0, 0, 0, 0.3);
   }
-  .nav > .nav-btn > label > span {
+
+  .nav>.nav-btn>label>span {
     display: block;
     width: 25px;
     height: 10px;
     border-top: 2px solid #eee;
   }
-  .nav > .nav-links {
+
+  .nav>.nav-links {
     position: absolute;
     display: block;
     width: 100%;
@@ -205,14 +210,17 @@ body {
     top: 50px;
     left: 0px;
   }
-  .nav > .nav-links > a {
+
+  .nav>.nav-links>a {
     display: block;
     width: 100%;
   }
-  .nav > #nav-check:not(:checked) ~ .nav-links {
+
+  .nav>#nav-check:not(:checked)~.nav-links {
     height: 0px;
   }
-  .nav > #nav-check:checked ~ .nav-links {
+
+  .nav>#nav-check:checked~.nav-links {
     height: calc(100vh - 50px);
     overflow-y: auto;
   }
@@ -240,7 +248,7 @@ body {
 }
 
 .card-login .btn-register {
-  background-color: #28a745; 
+  background-color: #28a745;
 }
 
 .card-login .btn-register:hover {
@@ -259,7 +267,8 @@ body {
   border-collapse: collapse;
 }
 
-.custom-table th, .custom-table td {
+.custom-table th,
+.custom-table td {
   padding: 10px;
   text-align: left;
   border: 1px solid #ddd;
@@ -291,8 +300,26 @@ body {
 }
 
 .custom-button {
-  float: right;
-  margin-top: -40px;
+  margin-left: 10px;
+}
+
+.custom-export {
+  margin-left: 10px;
+}
+
+.button-container-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.btn-export {
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .form-group {
@@ -326,12 +353,12 @@ body {
 }
 
 .flash {
-  background-color: #28a745; 
-  color: #fff; 
+  background-color: #28a745;
+  color: #fff;
   padding: 10px;
   text-align: center;
   font-weight: bold;
-  display: none; 
+  display: none;
 }
 
 .notification {
@@ -339,8 +366,8 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #28a745; 
-  color: #fff; 
+  background-color: #28a745;
+  color: #fff;
   text-align: center;
   padding: 10px;
   font-weight: bold;
@@ -476,24 +503,26 @@ p {
   text-decoration: none;
   margin: 0 10px;
 }
+
 .custom-search {
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 5px;
   border: 1px solid red;
 }
+
 .task-list-container {
   display: flex;
   align-items: center;
 }
 
 h2 {
-  margin-right: 10px; 
+  margin-right: 10px;
 }
 
 .task-list {
-  width: 50px; 
-  height: 50px; 
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
 }
 
@@ -511,8 +540,8 @@ h2 {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #a7283b; 
-  color: #fff; 
+  background-color: #a7283b;
+  color: #fff;
   text-align: center;
   padding: 10px;
   font-weight: bold;
