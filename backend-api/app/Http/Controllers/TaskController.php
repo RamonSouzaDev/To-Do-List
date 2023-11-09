@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Exports\TaskExport;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
+use App\Helpers\ExcelExportHelper;
 use App\Http\Requests\CreateTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class TaskController extends Controller
 {
@@ -76,6 +79,19 @@ class TaskController extends Controller
     {
         $task->update(['completed' => false]);
         return response()->json($task, 200);
+    }
+
+    /**
+     * Exporta tarefas para um arquivo Excel.
+     *
+     * @param  Request $request
+     * @return BinaryFileResponse
+     */
+    public function exportExcel(): BinaryFileResponse
+    {
+        $tasks = Task::all();
+
+        return ExcelExportHelper::exportToExcel($tasks, TaskExport::class, 'tarefas.xlsx');
     }
 
 }
