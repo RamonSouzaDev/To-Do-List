@@ -10,4 +10,4 @@ docker exec -i backend-api_app_1 sh -c "php artisan key:generate"
 
 docker exec -i backend-api_app_1 sh -c "php artisan passport:keys"
 
-docker exec -i backend-api_app_1 sh -c "php artisan migrate
+docker exec -i backend-api_app_1 sh -c "php artisan migrate"
