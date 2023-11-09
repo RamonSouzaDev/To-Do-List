@@ -16,7 +16,7 @@
               <label for="description">Descrição:</label>
               <textarea id="description" v-model="newTask.description" class="custom-textarea" rows="4"></textarea>
             </div>
-            <div class="button-container">
+            <div class="button-container-actions">
               <button type="submit" class="btn-register-task">Adicionar Tarefa</button>
               <span class="button-space"></span>
               <button @click="dashboard" class="btn-add">Voltar</button>

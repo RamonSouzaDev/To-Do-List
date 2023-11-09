@@ -1,5 +1,6 @@
 <template>
   <menu-dashboard></menu-dashboard>
+  <div class="card-table">
   <div class="about-me">
     <div class="about-me-header">
       <h2>Sobre Mim</h2>
@@ -16,6 +17,7 @@
         Acredito que podemos evoluir todos os dias.
       </p>
     </div>
+  </div>
   </div>
   <page-footer></page-footer>
 </template>
