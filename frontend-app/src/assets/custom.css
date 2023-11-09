@@ -272,6 +272,9 @@ body {
   padding: 10px;
   text-align: left;
   border: 1px solid #ddd;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
 }
 
 .custom-table th {
@@ -311,6 +314,7 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .btn-export {
@@ -417,6 +421,7 @@ body {
 .btn-delete-container {
   margin-top: 5px;
   margin-left: 10px;
+  white-space: nowrap;
 }
 
 .profile-image {
@@ -509,6 +514,8 @@ p {
   border-radius: 5px;
   padding: 5px;
   border: 1px solid red;
+  width: 100%;
+  margin-bottom: 15px;
 }
 
 .task-list-container {
@@ -533,6 +540,8 @@ h2 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   margin: 20px;
+  overflow-x: auto;
+  margin-bottom: 90px;
 }
 
 .notification-error {
@@ -582,4 +591,67 @@ h2 {
 
 .modal-body {
   margin-left: 60px;
+}
+
+.table-container {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.table-container table {
+  width: 100%;
+}
+.v-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  white-space: nowrap;
+}
+
+.v-pagination .pagination-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin: 0 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.v-pagination .pagination-btn:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.v-pagination .pagination-btn.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn-add,
+.btn-export {
+  margin-top: 10px;
+}
+
+.btn-export,
+.btn-add {
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+@media (max-width: 767px) {
+  .btn-export,
+  .btn-add {
+    width: 100%; 
+    margin-right: 0;
+  }
 }

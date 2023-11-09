@@ -15,7 +15,6 @@
         <div class="form-group">
           <input type="text" class="form-control custom-search" v-model="search" placeholder="Pesquisar Tarefas"
             @input="searchTasks" />
-
         </div>
         <div class="button-container-actions">
           <button class="btn-add custom-export" @click="exportExcel">
@@ -28,7 +27,7 @@
         <br>
         <confirm-delete-modal :show="showModal" :task-to-delete="taskToDelete" @confirm-delete="confirmDelete"
           @cancel-delete="cancelDelete" />
-
+        <div class="table-container">
         <table class="table custom-table">
           <thead>
             <tr>
@@ -58,11 +57,13 @@
             </tr>
           </tbody>
         </table>
-
-        <paginate v-model="currentPage" :pages="10" :range-size="1" active-color="#DCEDFF"
+      </div>
+        <br>
+        <paginate class="v-pagination" v-model="currentPage" :pages="10" :range-size="1" active-color="#DCEDFF"
           @update:modelValue="fetchTasks(currentPage)" />
       </div>
     </div>
+    
   </div>
   <page-footer></page-footer>
 </template>
