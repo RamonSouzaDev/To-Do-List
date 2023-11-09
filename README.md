@@ -18,26 +18,28 @@
 
 - **Instalando Projeto**
 
+# Vídeo de configuração do ambiente
+https://youtu.be/458Q5dpcMrc
+
+
 1. Clone o repositório :
 git clone git@github.com:RamonSouzaDev/To-Do-List-.git
 
 2. Entre na pasta do projeto
 cd "nome do projeto"
 
-3. Faça uma cópia do env.
-cp .env.example .env
+**Executando pelo docker** <p align="left"> <a href="https://www.docker.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="40" height="40"/> </a>
 
-4. Instale as dependências
-composer install
+3.  Execute os comandos para subir o ambiente de backend
+./run-docker-backend.sh up --build
+./run-docker-backend.sh down
 
-5. Gerando a chave
-php artisan key:generate
+4. Execute os comandos para subir o ambiente de frontend
+./run-docker-frontend.sh up --build
+./run-docker-frontend.sh down
 
-6. Execute a migrate para gerar as tabelas do banco de dados
-php artisan migrate
-
-7. Execute o projeto
-php artisan serve
+5. Abra uma terceira guia no seu terminal e execute o comando
+./start-backend.sh
 
 **Testes Unitários** 💡
 
@@ -48,9 +50,9 @@ Execute os comandos abaixo para gerar dados
 
 1. php artisan db:seed --class=TaskSeeder
 
-**Executando pelo docker** <p align="left"> <a href="https://www.docker.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="40" height="40"/> </a>
 
-1. Execute o comando docker-compose up -d --build
+- **URL**
+http://192.168.144.2:8080/
 
 - **Rotas**
 
@@ -112,3 +114,10 @@ Requisições para a API devem seguir os padrões:
 | Método | Rota | Descrição |
 |---|---|---|
 | `DELETE` | /api/tasks/{task} | Rota para deletar uma Tarefa |
+
+
+## Rota Bônus Métodos 🔥🔥🔥
+
+| Método | Rota | Descrição |
+|---|---|---|
+| `POST` | /api/tasks/export-excel | Rota para fazer o download do relatório |
