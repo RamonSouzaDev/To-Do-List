@@ -1,4 +1,5 @@
 <template>
+  <div id="flash-notification" class="notification" style="display: none;"></div>
   <div class="card card-login">
     <h1 class="card-header">Login</h1>
     <form @submit.prevent="login">
@@ -41,6 +42,13 @@ export default {
         this.$emit('login-success');
         this.$router.push('/dashboard');
       } catch (error) {
+        const notification = document.getElementById('flash-notification');
+          notification.textContent = 'Dados de login inválidos !';
+          notification.style.display = 'block';
+
+          setTimeout(() => {
+            notification.style.display = 'none';
+          }, 4000);
         console.error('Erro de autenticação:', error);
       }
     },

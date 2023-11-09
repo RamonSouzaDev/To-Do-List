@@ -339,8 +339,8 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #28a745; /* Cor de sucesso verde */
-  color: #fff; /* Cor do texto branco */
+  background-color: #28a745; 
+  color: #fff; 
   text-align: center;
   padding: 10px;
   font-weight: bold;
@@ -425,7 +425,7 @@ p {
 .page-footer {
   background-color: #333;
   color: #fff;
-  padding: 10px 0; /* Reduzir a altura ajustando o valor do padding */
+  padding: 10px 0;
   text-align: center;
   position: fixed;
   bottom: 0;
@@ -473,17 +473,17 @@ p {
 }
 .task-list-container {
   display: flex;
-  align-items: center; /* Alinha os itens verticalmente no centro */
+  align-items: center;
 }
 
 h2 {
-  margin-right: 10px; /* Adiciona um espaço à direita do título */
+  margin-right: 10px; 
 }
 
 .task-list {
-  width: 50px; /* Ajuste a largura conforme necessário */
-  height: 50px; /* Ajuste a altura conforme necessário */
-  border-radius: 50%; /* Torna a imagem redonda */
+  width: 50px; 
+  height: 50px; 
+  border-radius: 50%;
 }
 
 .card-table {
@@ -493,4 +493,18 @@ h2 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   margin: 20px;
+}
+
+.notification {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #a7283b; 
+  color: #fff; 
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  display: none;
+  transition: all 0.3s ease;
 }
