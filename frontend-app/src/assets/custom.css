@@ -485,3 +485,12 @@ h2 {
   height: 50px; /* Ajuste a altura conforme necessário */
   border-radius: 50%; /* Torna a imagem redonda */
 }
+
+.card-table {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  margin: 20px;
+}

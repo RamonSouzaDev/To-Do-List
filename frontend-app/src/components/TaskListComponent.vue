@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="container mt-4">
+      <div class="card-table">
       <div class="task-list-container">
         <h2>Lista de Tarefas</h2>
         <img src="../assets/task-list-image.png" alt="Minha Foto" class="task-list" />
@@ -18,6 +19,7 @@
         Adicionar Tarefa
       </button>
 
+      
       <table class="table custom-table">
         <thead>
           <tr>
@@ -32,6 +34,7 @@
             <td>{{ task.title }}</td>
             <td>{{ task.completed ? 'Sim' : 'Não' }}</td>
             <td>{{ task.user.name }}</td>
+            <td>
             <div class="btn-delete-container">
               <button :class="{ 'btn-complete': !task.completed, 'btn-incomplete': task.completed }"
                 @click="task.completed ? markAsInclompeted(task) : markAsCompleted(task)">
@@ -42,12 +45,14 @@
                 Excluir
               </button>
             </div>
+          </td>
           </tr>
         </tbody>
       </table>
 
       <paginate v-model="currentPage" :pages="10" :range-size="1" active-color="#DCEDFF" @update:modelValue="fetchTasks(currentPage)" />
     </div>
+  </div>
   </div>
   <page-footer></page-footer>
 </template>
