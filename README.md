@@ -18,7 +18,9 @@
 
 - **Instalando Projeto**
 
-# Vídeo de configuração do ambiente
+# Vídeo de configuração do ambiente no Youtube
+
+Clique aqui : https://youtu.be/458Q5dpcMrc
 
 [![Watch the video](https://i.stack.imgur.com/Vp2cE.png)](https://youtu.be/458Q5dpcMrc)
 
