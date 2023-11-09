@@ -54,13 +54,12 @@ Execute os comandos abaixo para gerar dados
 1. php artisan db:seed --class=TaskSeeder
 
 
-- **URL**
+- **URL** 🏁🏁🏁
 http://192.168.144.2:8080/
 
 - **Rotas**
 
-Obs: Lembre de adicionar o Bearer Token do usuário logado na requisição.
-Obs: Para efetuar o disparo do email descomente a linha de 27 na classe UserService
+Obs: Lembre de adicionar o Bearer Token do usuário logado na requisição, caso esteja usando Postman. 👍
 
 ## Métodos 🔥🔥🔥
 Requisições para a API devem seguir os padrões:
