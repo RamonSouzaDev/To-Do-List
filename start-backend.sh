@@ -1,5 +1,7 @@
 #!/bin/bash
 
+docker exec -i backend-api_app_1 sh -c "php artisan passport:keys"
+
 # Copiar .env.example para .env no contêiner
 docker exec -i backend-api_app_1 sh -c "cp .env.example .env"
 
