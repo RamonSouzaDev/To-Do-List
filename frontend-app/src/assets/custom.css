@@ -471,3 +471,17 @@ p {
   padding: 5px;
   border: 1px solid red;
 }
+.task-list-container {
+  display: flex;
+  align-items: center; /* Alinha os itens verticalmente no centro */
+}
+
+h2 {
+  margin-right: 10px; /* Adiciona um espaço à direita do título */
+}
+
+.task-list {
+  width: 50px; /* Ajuste a largura conforme necessário */
+  height: 50px; /* Ajuste a altura conforme necessário */
+  border-radius: 50%; /* Torna a imagem redonda */
+}

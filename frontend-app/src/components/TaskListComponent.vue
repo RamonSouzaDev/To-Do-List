@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="container mt-4">
-      <h2>Lista de Tarefas</h2>
+      <div class="task-list-container">
+        <h2>Lista de Tarefas</h2>
+        <img src="../assets/task-list-image.png" alt="Minha Foto" class="task-list" />
+      </div>
+      <br>
       <div id="flash-notification" class="notification" style="display: none;"></div>
 
 
