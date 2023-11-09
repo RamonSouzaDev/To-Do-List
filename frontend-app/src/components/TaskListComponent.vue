@@ -7,6 +7,8 @@
         <img src="../assets/task-list-image.png" alt="Minha Foto" class="task-list" />
       </div>
       <br>
+      <confirm-delete-modal :show="showModal" :task-to-delete="taskToDelete" @confirm-delete="confirmDelete"
+        @cancel-delete="cancelDelete" />
       <div id="flash-notification" class="notification" style="display: none;"></div>
 
 
@@ -18,7 +20,8 @@
       <button class="btn-add custom-button" @click="addNewTask">
         Adicionar Tarefa
       </button>
-
+      <confirm-delete-modal :show="showModal" :task-to-delete="taskToDelete" @confirm-delete="confirmDelete"
+        @cancel-delete="cancelDelete" />
       
       <table class="table custom-table">
         <thead>
@@ -59,16 +62,20 @@
 <script>
 import axios from 'axios';
 import PageFooterView from '@/components/PageFooterComponent.vue';
+import ConfirmDeleteModalView from '@/components/ConfirmDeleteModalComponent.vue';
 
 export default {
   components: {
-    'page-footer': PageFooterView
+    'page-footer': PageFooterView,
+    'confirm-delete-modal': ConfirmDeleteModalView
   },
   data() {
     return {
       tasks: [],
       search: '',
       currentPage: 1,
+      showModal: false,
+      taskToDelete: null,
     };
   },
   methods: {
@@ -150,17 +157,22 @@ export default {
         });
     },
     deleteTask(task) {
+      this.taskToDelete = task;
+      this.showModal = true;
+
+    },
+    confirmDelete(taskToDelete) {
       const token = localStorage.getItem('token');
 
       axios
-        .delete(`http://127.0.0.1:8000/api/tasks/${task.id}`, {
+        .delete(`http://127.0.0.1:8000/api/tasks/${taskToDelete.id}`, {
           headers: {
             Authorization: 'Bearer ' + token,
           },
         })
         .then((response) => {
           response.data.data;
-          task.completed = false;
+          taskToDelete.completed = false;
           const notification = document.getElementById('flash-notification');
           notification.textContent = 'A tarefa foi excluída sucesso!';
           notification.style.display = 'block';
@@ -174,6 +186,11 @@ export default {
         .catch((error) => {
           console.error('Erro ao excluir tarefa:', error);
         });
+      this.showModal = false;
+    },
+    cancelDelete() {
+      this.taskToDelete = null;
+      this.showModal = false;
     },
   },
   created() {
