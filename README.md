@@ -118,7 +118,7 @@ Requisições para a API devem seguir os padrões:
 | `DELETE` | /api/tasks/{task} | Rota para deletar uma Tarefa |
 
 
-## Rota Bônus Métodos 🔥🔥🔥
+## Rota Bônus Métodos 🔥🔥🔥 📊 ⬆️ ⬆️
 
 | Método | Rota | Descrição |
 |---|---|---|
