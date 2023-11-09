@@ -495,7 +495,7 @@ h2 {
   margin: 20px;
 }
 
-.notification {
+.notification-error {
   position: fixed;
   top: 0;
   left: 0;

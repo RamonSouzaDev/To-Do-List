@@ -1,4 +1,6 @@
 <template>
+  <div id="flash-notification-error" class="notification-error" style="display: none;"></div>
+  <div id="flash-notification" class="notification" style="display: none;"></div>
   <div class="card card-login">
     <div class="card-header">Registrar</div>
     <div class="card-body">
@@ -26,7 +28,7 @@
 
 <script>
 import axios from 'axios';
-import '../assets/custom.css'; // Importe o arquivo CSS
+import '../assets/custom.css';
 
 export default {
   name: 'RegisterComponent',
@@ -41,21 +43,36 @@ export default {
     };
   },
   methods: {
-    saveData() {
-      axios.post("http://127.0.0.1:8000/api/register", this.student)
-        .then(({ data }) => {
-          console.log(data);
-          try {
-            alert("Registro salvo com sucesso!");
-          } catch (err) {
-            alert("failed");
-          }
-        });
+    async saveData() {
+      try {
+        await axios.post("http://127.0.0.1:8000/api/register", this.student);
+      const notification = document.getElementById('flash-notification');
+      notification.textContent = 'Usuário cadastrado com sucesso !';
+      notification.style.display = 'block';
+
+      setTimeout(() => {
+        notification.style.display = 'none';
+      }, 4000);
+
+  } catch (error) {
+    if (error.response && error.response.status === 500) {
+      const notification = document.getElementById('flash-notification-error');
+      notification.textContent = 'Você deve preencher todos os campos!';
+      notification.style.display = 'block';
+
+      setTimeout(() => {
+        notification.style.display = 'none';
+      }, 4000);
+    } else {
+      console.error('Erro na requisição HTTP:', error);
+    }
+  }
     },
     redirectToLogin() {
       this.$router.push('/');
     }
+
   },
-  
+
 };
 </script>

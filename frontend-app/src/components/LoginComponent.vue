@@ -1,5 +1,5 @@
 <template>
-  <div id="flash-notification" class="notification" style="display: none;"></div>
+  <div id="flash-notification" class="notification-error" style="display: none;"></div>
   <div class="card card-login">
     <h1 class="card-header">Login</h1>
     <form @submit.prevent="login">
