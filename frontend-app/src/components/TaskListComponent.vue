@@ -7,7 +7,8 @@
 
       <div class="form-group">
         <input type="text" class="form-control custom-search" v-model="search" placeholder="Pesquisar Tarefas"
-          @input="searchTasks" />
+       @input="searchTasks" />
+
       </div>
       <button class="btn-add custom-button" @click="addNewTask">
         Adicionar Tarefa
