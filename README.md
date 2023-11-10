@@ -3,7 +3,7 @@
 
 - 🔭 Atualmente estou trabalhando em [Desenvolvimento de projeto Back-end](https://github.com/RamonSouzaDev/To-Do-List-)
 
-- 🌱 Atualmente estou aprendendo **Laravel e MYSQL**
+- 🌱 Atualmente estou aprendendo **Arquitetura e Engenharia de Software**
 
 - 📫 Como chegar até mim **dwmom@hotmail.com**
 
