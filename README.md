@@ -26,7 +26,7 @@ Clique aqui : https://youtu.be/458Q5dpcMrc
 
 
 1. Clone o repositório :
-git clone git@github.com:RamonSouzaDev/To-Do-List-.git
+git clone git@github.com:RamonSouzaDev/To-Do-List.git
 
 2. Entre na pasta do projeto
 cd "nome do projeto"
