@@ -3,6 +3,7 @@ version: "3.3"
 services:
     # image project
     app:
+        container_name: backend-api_app
         build:
             context: . 
             dockerfile: Dockerfile
