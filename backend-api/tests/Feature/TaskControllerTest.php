@@ -141,4 +141,29 @@ class TaskControllerTest extends TestCase
         ]);
     }
 
+    /**
+     * Testa a a marcação de todas as tarefas como concluído.
+     *
+     * @return void
+     * @covers TaskController@markAllAsCompleted
+     */
+    public function testMarkAllTaskAsCompleted()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user, 'api');
+
+        Task::factory(20)->create(['completed' => false]);
+
+        $response = $this->post('/api/tasks/mark-all-as-completed');
+
+        $response->assertStatus(200);
+
+        $this->assertDatabaseHas('tasks', ['completed' => true]);
+
+        $completedTasks = Task::where('completed', true)->get();
+
+        $this->assertCount(20, $completedTasks);
+    }
+
 }

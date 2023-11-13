@@ -82,6 +82,14 @@ class TaskController extends Controller
     }
 
     /**
+     * @return void
+     */
+    public function markAllAsCompleted(): void
+    {
+        Task::where('completed', false)->update(['completed' => true]);
+    }
+
+    /**
      * Exporta tarefas para um arquivo Excel.
      *
      * @param  Request $request

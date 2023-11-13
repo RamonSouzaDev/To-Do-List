@@ -28,5 +28,6 @@ Route::middleware('auth:api')->group(function () {
 
     Route::put('/tasks/{task}/complete', 'App\Http\Controllers\TaskController@markAsCompleted');
     Route::put('/tasks/{task}/incompleted', 'App\Http\Controllers\TaskController@markAsIncompleted');
-    Route::post('/tasks/export-excel', 'App\Http\Controllers\TaskController@exportExcel')->name('tasks.export-excel');;
+    Route::post('/tasks/export-excel', 'App\Http\Controllers\TaskController@exportExcel')->name('tasks.export-excel');
+    Route::post('/tasks/mark-all-as-completed', 'App\Http\Controllers\TaskController@markAllAsCompleted');
 });
