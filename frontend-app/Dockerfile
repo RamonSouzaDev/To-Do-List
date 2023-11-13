@@ -4,6 +4,8 @@ FROM node:14
 ARG user=ramon
 ARG uid=1000
 
+RUN npm install -g @vue/cli@5.0.8
+
 WORKDIR /usr/src/app
 
 COPY package*.json ./

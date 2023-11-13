@@ -11,7 +11,9 @@ class TaskSeeder extends Seeder
 {
     public function run()
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create([
+            'name' => 'Sistema',
+        ]);
 
         Auth::login($user);
 
