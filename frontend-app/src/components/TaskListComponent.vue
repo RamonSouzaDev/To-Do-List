@@ -24,6 +24,8 @@
             Adicionar Tarefa
           </button>
           <button class="btn-add custom-mark-all-as-complete" @click="markAllAsCompleted">Marcar Todas como Concluído</button>
+
+          <button class="btn-add custom-mark-all-as-incompleted" @click="markAllAsIncompleted">Marcar Todas como Incompleto</button>
         </div>
         <br>
         <confirm-delete-modal :show="showModal" :task-to-delete="taskToDelete" @confirm-delete="confirmDelete"
@@ -136,6 +138,31 @@ export default {
     addNewTask() {
       this.$router.push('/register-task');
     },
+    markAllAsIncompleted() {
+      const token = localStorage.getItem('token');
+
+      axios
+        .post(`http://127.0.0.1:8000/api/tasks/mark-all-as-incompleted`, null, {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        })
+        .then((response) => {
+          response.data.data;
+          const notification = document.getElementById('flash-notification');
+          notification.textContent = 'Todas tarefas foram maracadas como incompleto!';
+          notification.style.display = 'block';
+
+          setTimeout(() => {
+            notification.style.display = 'none';
+          }, 4000);
+
+          this.tasks.forEach(task => task.completed = true);
+        })
+        .catch((error) => {
+          console.error('Erro ao marcar as tarefas como incompleta:', error);
+        });
+    },
     markAllAsCompleted() {
       const token = localStorage.getItem('token');
 
@@ -158,7 +185,7 @@ export default {
           this.tasks.forEach(task => task.completed = true);
         })
         .catch((error) => {
-          console.error('Erro ao marcar a tarefa como incompleta:', error);
+          console.error('Erro ao marcar as tarefas como concluído:', error);
         });
     },
     markAsInclompeted(task) {
