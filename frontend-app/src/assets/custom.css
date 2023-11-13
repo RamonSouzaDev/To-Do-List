@@ -314,6 +314,10 @@ body {
   margin-left: 10px;
 }
 
+.custom-mark-all-as-complete {
+  margin-left: 10px;
+}
+
 .button-container-actions {
   display: flex;
   justify-content: flex-end;

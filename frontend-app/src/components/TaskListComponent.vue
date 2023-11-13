@@ -23,6 +23,7 @@
           <button class="btn-add custom-button" @click="addNewTask">
             Adicionar Tarefa
           </button>
+          <button class="btn-add custom-mark-all-as-complete" @click="markAllAsCompleted">Marcar Todas como Concluído</button>
         </div>
         <br>
         <confirm-delete-modal :show="showModal" :task-to-delete="taskToDelete" @confirm-delete="confirmDelete"
@@ -135,6 +136,31 @@ export default {
     addNewTask() {
       this.$router.push('/register-task');
     },
+    markAllAsCompleted() {
+      const token = localStorage.getItem('token');
+
+      axios
+        .post(`http://127.0.0.1:8000/api/tasks/mark-all-as-completed`, null, {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        })
+        .then((response) => {
+          response.data.data;
+          const notification = document.getElementById('flash-notification');
+          notification.textContent = 'Todas tarefas foram maracadas como concluído!';
+          notification.style.display = 'block';
+
+          setTimeout(() => {
+            notification.style.display = 'none';
+          }, 4000);
+
+          this.tasks.forEach(task => task.completed = true);
+        })
+        .catch((error) => {
+          console.error('Erro ao marcar a tarefa como incompleta:', error);
+        });
+    },
     markAsInclompeted(task) {
       const token = localStorage.getItem('token');
 
@@ -185,6 +211,7 @@ export default {
           }, 4000);
 
           this.fetchTasks(1);
+
         })
         .catch((error) => {
           console.error('Erro ao excluir tarefa:', error);
