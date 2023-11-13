@@ -23,15 +23,19 @@
       </form>
     </div>
   </div>
+  <page-footer></page-footer>
 </template>
-
 
 <script>
 import axios from 'axios';
+import PageFooterView from '@/components/PageFooterComponent.vue';
 import '../assets/custom.css';
 
 export default {
   name: 'RegisterComponent',
+  components: {
+    'page-footer': PageFooterView
+  },
   data() {
     return {
       result: {},

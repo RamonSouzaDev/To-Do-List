@@ -1,29 +1,36 @@
 <template>
   <div id="flash-notification" class="notification-error" style="display: none;"></div>
-  <div class="card card-login">
-    <h1 class="card-header">Login</h1>
-    <form @submit.prevent="login">
-      <label for="email">Email:</label>
-      <input type="email" id="email" class="input" v-model="formData.email" required>
-      <br>
-      <label for="password">Senha:</label>
-      <input type="password" id="password" class="input" v-model="formData.password" required>
-      <br>
-      <br>
-      <div class="button-container">
-        <button type="submit" class="btn-register-task">Login</button>
-        <span class="button-space"></span>
-        <button @click.prevent="redirectToRegister" class="btn-add">Registrar</button>
-      </div>
-    </form>
+  <div>
+    <div class="card card-login">
+      <h1 class="card-header">Login</h1>
+      <form @submit.prevent="login">
+        <label for="email">Email:</label>
+        <input type="email" id="email" class="input" v-model="formData.email" required>
+        <br>
+        <label for="password">Senha:</label>
+        <input type="password" id="password" class="input" v-model="formData.password" required>
+        <br>
+        <br>
+        <div class="button-container">
+          <button type="submit" class="btn-register-task">Login</button>
+          <span class="button-space"></span>
+          <button @click.prevent="redirectToRegister" class="btn-add">Registrar</button>
+        </div>
+      </form>
+    </div>
   </div>
+  <page-footer></page-footer>
 </template>
 
 
 <script>
 import axios from 'axios';
+import PageFooterView from '@/components/PageFooterComponent.vue';
 
 export default {
+  components: {
+    'page-footer': PageFooterView
+  },
   data() {
     return {
       formData: {
@@ -43,12 +50,12 @@ export default {
         this.$router.push('/dashboard');
       } catch (error) {
         const notification = document.getElementById('flash-notification');
-          notification.textContent = 'Dados de login inválidos !';
-          notification.style.display = 'block';
+        notification.textContent = 'Dados de login inválidos !';
+        notification.style.display = 'block';
 
-          setTimeout(() => {
-            notification.style.display = 'none';
-          }, 4000);
+        setTimeout(() => {
+          notification.style.display = 'none';
+        }, 4000);
         console.error('Erro de autenticação:', error);
       }
     },
