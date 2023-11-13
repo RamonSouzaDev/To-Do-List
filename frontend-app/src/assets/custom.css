@@ -306,15 +306,10 @@ body {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-.custom-button {
-  margin-left: 10px;
-}
-
-.custom-export {
-  margin-left: 10px;
-}
-
-.custom-mark-all-as-complete {
+.custom-button,
+.custom-export,
+.custom-mark-all-as-complete
+{
   margin-left: 10px;
 }
 
