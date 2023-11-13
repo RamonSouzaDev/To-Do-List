@@ -1,6 +1,8 @@
 <template>
   <menu-dashboard></menu-dashboard>
+  <div>
   <div class="container mt-4">
+  <div class="card-table">
     <div class="center-card">
       <div class="card">
         <div class="card-header">
@@ -25,6 +27,8 @@
         </div>
       </div>
     </div>
+  </div>
+  </div>
   </div>
   <page-footer></page-footer>
 </template>
