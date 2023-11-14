@@ -49,7 +49,7 @@
                 <div class="btn-delete-container">
                   <button :class="{ 'btn-complete': !task.completed, 'btn-incomplete': task.completed }"
                     @click="task.completed ? markAsInclompeted(task) : markAsCompleted(task)">
-                    <span v-if="task.completed">Desmarcar como concluída</span>
+                    <span v-if="task.completed">Marcar como incompleta</span>
                     <span v-else>Marcar como concluída</span>
                   </button>
                   <button class="btn-delete" @click="deleteTask(task)">
@@ -90,6 +90,58 @@ export default {
     };
   },
   methods: {
+    notify(message) {
+      const notification = document.getElementById('flash-notification');
+      notification.textContent = message;
+      notification.style.display = 'block';
+
+      setTimeout(() => {
+        notification.style.display = 'none';
+      }, 4000);
+    },
+    makeRequest(method, url, successMessage, errorMessage, data = null) {
+      const token = localStorage.getItem('token');
+
+      axios({
+        method: method,
+        url: axios.defaults.baseURL + url,
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+        responseType: url === '/export-excel' ? 'blob' : 'json',
+        data: data,
+        
+      })
+        .then((response) => {
+          response.data.data;
+          this.notify(successMessage);
+          if (url === '/mark-all-as-incompleted') {
+            this.tasks.forEach(task => task.completed = false);
+          }
+          if (url === '/mark-all-as-completed') {
+            this.tasks.forEach(task => task.completed = true);
+          }
+          if (url === '/export-excel') {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'tarefas.xlsx');
+            document.body.appendChild(link);
+            link.click();
+
+            const notification = document.getElementById('flash-notification');
+            notification.textContent = 'Download de relatório realizado com sucesso!';
+            notification.style.display = 'block';
+
+            setTimeout(() => {
+              notification.style.display = 'none';
+            }, 4000);
+            }
+        })
+        .catch((error) => {
+          console.error(errorMessage, error);
+        });
+    },
     fetchTasks(page) {
       this.currentPage = page;
       const token = localStorage.getItem('token');
@@ -112,137 +164,28 @@ export default {
       this.fetchTasks(1);
     },
     markAsCompleted(task) {
-      const token = localStorage.getItem('token');
-
-      axios
-        .put(`http://127.0.0.1:8000/api/tasks/${task.id}/complete`, null, {
-          headers: {
-            Authorization: 'Bearer ' + token,
-          },
-        })
-        .then((response) => {
-          response.data.data;
-          task.completed = true;
-          const notification = document.getElementById('flash-notification');
-          notification.textContent = 'A tarefa foi marcada como concluída com sucesso!';
-          notification.style.display = 'block';
-
-          setTimeout(() => {
-            notification.style.display = 'none';
-          }, 4000);
-        })
-        .catch((error) => {
-          console.error('Erro ao marcar a tarefa como concluída:', error);
-        });
+      this.makeRequest('put', `/${task.id}/complete`, 'A tarefa foi marcada como concluída com sucesso!', 'Erro ao marcar a tarefa como concluída');
+      task.completed = true;
     },
     addNewTask() {
       this.$router.push('/register-task');
     },
     markAllAsIncompleted() {
-      const token = localStorage.getItem('token');
-
-      axios
-        .post(`http://127.0.0.1:8000/api/tasks/mark-all-as-incompleted`, null, {
-          headers: {
-            Authorization: 'Bearer ' + token,
-          },
-        })
-        .then((response) => {
-          response.data.data;
-          const notification = document.getElementById('flash-notification');
-          notification.textContent = 'Todas tarefas foram maracadas como incompleto!';
-          notification.style.display = 'block';
-
-          setTimeout(() => {
-            notification.style.display = 'none';
-          }, 4000);
-
-          this.tasks.forEach(task => task.completed = true);
-        })
-        .catch((error) => {
-          console.error('Erro ao marcar as tarefas como incompleta:', error);
-        });
+      this.makeRequest('post', '/mark-all-as-incompleted', 'Todas as tarefas foram marcadas como incompletas!', 'Erro ao marcar as tarefas como incompletas');
     },
     markAllAsCompleted() {
-      const token = localStorage.getItem('token');
-
-      axios
-        .post(`http://127.0.0.1:8000/api/tasks/mark-all-as-completed`, null, {
-          headers: {
-            Authorization: 'Bearer ' + token,
-          },
-        })
-        .then((response) => {
-          response.data.data;
-          const notification = document.getElementById('flash-notification');
-          notification.textContent = 'Todas tarefas foram maracadas como concluído!';
-          notification.style.display = 'block';
-
-          setTimeout(() => {
-            notification.style.display = 'none';
-          }, 4000);
-
-          this.tasks.forEach(task => task.completed = true);
-        })
-        .catch((error) => {
-          console.error('Erro ao marcar as tarefas como concluído:', error);
-        });
+      this.makeRequest('post', '/mark-all-as-completed', 'Todas as tarefas foram marcadas como concluídas!', 'Erro ao marcar as tarefas como concluídas');
     },
     markAsInclompeted(task) {
-      const token = localStorage.getItem('token');
-
-      axios
-        .put(`http://127.0.0.1:8000/api/tasks/${task.id}/incompleted`, null, {
-          headers: {
-            Authorization: 'Bearer ' + token,
-          },
-        })
-        .then((response) => {
-          response.data.data;
-          task.completed = false;
-          const notification = document.getElementById('flash-notification');
-          notification.textContent = 'A tarefa foi marcada como incompleta com sucesso!';
-          notification.style.display = 'block';
-
-          setTimeout(() => {
-            notification.style.display = 'none';
-          }, 4000);
-        })
-        .catch((error) => {
-          console.error('Erro ao marcar a tarefa como incompleta:', error);
-        });
+      this.makeRequest('put', `/${task.id}/incompleted`, 'A tarefa foi marcada como incompleta com sucesso!', 'Erro ao marcar a tarefa como incompleta');
+      task.completed = false;
     },
     deleteTask(task) {
       this.taskToDelete = task;
       this.showModal = true;
-
     },
     confirmDelete(taskToDelete) {
-      const token = localStorage.getItem('token');
-
-      axios
-        .delete(`http://127.0.0.1:8000/api/tasks/${taskToDelete.id}`, {
-          headers: {
-            Authorization: 'Bearer ' + token,
-          },
-        })
-        .then((response) => {
-          response.data.data;
-          taskToDelete.completed = false;
-          const notification = document.getElementById('flash-notification');
-          notification.textContent = 'A tarefa foi excluída sucesso!';
-          notification.style.display = 'block';
-
-          setTimeout(() => {
-            notification.style.display = 'none';
-          }, 4000);
-
-          this.fetchTasks(1);
-
-        })
-        .catch((error) => {
-          console.error('Erro ao excluir tarefa:', error);
-        });
+      this.makeRequest('delete', `/${taskToDelete.id}`, 'A tarefa foi excluída com sucesso!', 'Erro ao excluir tarefa');
       this.showModal = false;
     },
     cancelDelete() {
@@ -250,37 +193,8 @@ export default {
       this.showModal = false;
     },
     exportExcel() {
-      const token = localStorage.getItem('token');
-
-      axios({
-        method: 'post',
-        url: `http://127.0.0.1:8000/api/tasks/export-excel`,
-        headers: {
-          Authorization: 'Bearer ' + token,
-        },
-        responseType: 'blob',
-      })
-        .then((response) => {
-          const url = window.URL.createObjectURL(new Blob([response.data]));
-          const link = document.createElement('a');
-          link.href = url;
-          link.setAttribute('download', 'tarefas.xlsx');
-          document.body.appendChild(link);
-          link.click();
-
-          const notification = document.getElementById('flash-notification');
-          notification.textContent = 'Download de relatório realizado com sucesso!';
-          notification.style.display = 'block';
-
-          setTimeout(() => {
-            notification.style.display = 'none';
-          }, 4000);
-        })
-        .catch((error) => {
-          console.error('Erro ao realizar o download do relatório:', error);
-        });
+      this.makeRequest('post', '/export-excel', 'Download de relatório realizado com sucesso!', 'Erro ao realizar o download do relatório');
     },
-
   },
   created() {
     this.fetchTasks(1);
