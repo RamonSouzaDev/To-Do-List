@@ -28,6 +28,7 @@
             <div class="nav-links">
                 <a @click="redirectToDashboard" target="_blank">Home</a>
                 <a @click="redirectToAboutMe" target="_blank">Sobre mim</a>
+                <a href="https://youtu.be/458Q5dpcMrc" target="_blank">Tutorial no Youtube</a>
                 <a href="https://www.linkedin.com/in/ramon-mendes-b44456164/" target="_blank">LinkedIn</a>
                 <a href="https://github.com/RamonSouzaDev">GitHub</a>
                 <button v-if="user" @click="logout" class="btn">Sair</button>
