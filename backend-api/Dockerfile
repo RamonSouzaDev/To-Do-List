@@ -55,4 +55,8 @@ COPY composer.json composer.lock /var/www/
 
 COPY . /var/www/
 
+USER root
+RUN chown -R $user:$user /var/www/coverage && \
+    chmod -R 755 /var/www/coverage
+
 USER $user
