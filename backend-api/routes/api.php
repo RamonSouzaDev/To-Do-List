@@ -24,11 +24,13 @@ Route::middleware('auth:api')->group(function () {
     });
     Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
     
-    Route::apiResource('tasks', TaskController::class);
+    Route::group(['prefix' => '/tasks'], function () {
+        Route::apiResource('', TaskController::class);
+        Route::put('/{task}/complete', 'App\Http\Controllers\TaskController@markAsCompleted');
+        Route::put('/{task}/incompleted', 'App\Http\Controllers\TaskController@markAsIncompleted');
+        Route::post('/export-excel', 'App\Http\Controllers\TaskController@exportExcel')->name('tasks.export-excel');
+        Route::post('/mark-all-as-completed', 'App\Http\Controllers\TaskController@markAllAsCompleted');
+        Route::post('/mark-all-as-incompleted', 'App\Http\Controllers\TaskController@markAllAsIncompleted');
+    });
 
-    Route::put('/tasks/{task}/complete', 'App\Http\Controllers\TaskController@markAsCompleted');
-    Route::put('/tasks/{task}/incompleted', 'App\Http\Controllers\TaskController@markAsIncompleted');
-    Route::post('/tasks/export-excel', 'App\Http\Controllers\TaskController@exportExcel')->name('tasks.export-excel');
-    Route::post('/tasks/mark-all-as-completed', 'App\Http\Controllers\TaskController@markAllAsCompleted');
-    Route::post('/tasks/mark-all-as-incompleted', 'App\Http\Controllers\TaskController@markAllAsIncompleted');
 });
