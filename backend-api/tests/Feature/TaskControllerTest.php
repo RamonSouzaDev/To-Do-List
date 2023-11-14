@@ -66,7 +66,7 @@ class TaskControllerTest extends TestCase
      * Testa a exclusão de uma tarefa.
      *
      * @return void
-     * @covers TaskController@delete
+     * @covers TaskController@destroy
      */
     public function testDeleteTask()
     {
@@ -85,7 +85,7 @@ class TaskControllerTest extends TestCase
      * Testa a marcação de uma tarefa como concluída.
      *
      * @return void
-     * @covers TaskController@complete
+     * @covers TaskController@markAsCompleted
      */
     public function testMarkTaskAsCompleted()
     {
@@ -104,7 +104,7 @@ class TaskControllerTest extends TestCase
      * Testa a marcação de uma tarefa como incompleta.
      *
      * @return void
-     * @covers TaskController@incompleted
+     * @covers TaskController@markAsIncompleted
      */
     public function testMarkTaskAsIncompleted()
     {
@@ -123,7 +123,7 @@ class TaskControllerTest extends TestCase
      * Testa a busca de tarefas por título.
      *
      * @return void
-     * @covers TaskController@search
+     * @covers TaskController@index
      */
     public function testSearchTaskByTitle()
     {
@@ -189,6 +189,27 @@ class TaskControllerTest extends TestCase
         $incompletedTasks = Task::where('completed', false)->get();
 
         $this->assertCount(20, $incompletedTasks);
+    }
+
+    /**
+     * Testa a exportação de tarefas para um arquivo Excel.
+     *
+     * @return void
+     * @covers TaskController@exportExcel
+     */
+    public function testExportExcel()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user, 'api');
+
+        Task::factory(20)->create(['completed' => true]);
+
+        $response = $this->post('/api/tasks/export-excel');
+
+        $response->assertStatus(200);
+
+        $response->assertDownload();
     }
 
 }
