@@ -118,8 +118,16 @@ Requisições para a API devem seguir os padrões:
 | `DELETE` | /api/tasks/{task} | Rota para deletar uma Tarefa |
 
 
-## Rota Bônus Métodos 🔥🔥🔥 📊 ⬆️ ⬆️
+## Rotas Bônus Métodos 🔥🔥🔥 📊 ⬆️ ⬆️
 
 | Método | Rota | Descrição |
 |---|---|---|
 | `POST` | /api/tasks/export-excel | Rota para fazer o download do relatório |
+
+| Método | Rota | Descrição |
+|---|---|---|
+| `POST` | /api/tasks/mark-all-as-completed | Marcar tudo como concluído |
+
+| Método | Rota | Descrição |
+|---|---|---|
+| `POST` | /api/tasks/mark-all-as-incompleted | Marcar tudo como incompleto |
