@@ -17,8 +17,11 @@ class TaskSeeder extends Seeder
 
         Auth::login($user);
 
-        Task::factory()->count(20)->create([
+        Task::factory()->count(5)->create([
             'completed' => false,
+        ]);
+        Task::factory()->count(15)->create([
+            'completed' => true,
         ]);
     }
 }
