@@ -187,6 +187,7 @@ export default {
     confirmDelete(taskToDelete) {
       this.makeRequest('delete', `/${taskToDelete.id}`, 'A tarefa foi excluída com sucesso!', 'Erro ao excluir tarefa');
       this.showModal = false;
+      this.fetchTasks(1);
     },
     cancelDelete() {
       this.taskToDelete = null;
