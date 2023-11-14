@@ -48,6 +48,9 @@ cd "nome do projeto"
 
 1. Execute o comando  ./vendor/bin/phpunit
 
+![image](https://github.com/RamonSouzaDev/To-Do-List/assets/47437727/8ac379e9-6cd2-461a-a9b4-129b8bc0adb1)
+
+
 **Seeders**
 Execute os comandos abaixo para gerar dados
 
