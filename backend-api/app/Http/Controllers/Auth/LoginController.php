@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+/**
+ * @codeCoverageIgnore
+ */
 class LoginController extends Controller
 {
     /*
