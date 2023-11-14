@@ -34,6 +34,7 @@
         <table class="table custom-table">
           <thead>
             <tr>
+              <th class="table-th-customize">Selecione</th>
               <th>Título</th>
               <th>Concluída</th>
               <th>Usuário</th>
@@ -42,6 +43,9 @@
           </thead>
           <tbody>
             <tr v-for="task in tasks" :key="task.id">
+              <td class="table-th-customize">
+                <input class="input-checkbox" type="checkbox" v-model="task.id" @change="checkBox(task)">
+              </td>
               <td>{{ task.title }}</td>
               <td>{{ task.completed ? 'Sim' : 'Não' }}</td>
               <td>{{ task.user.name }}</td>
@@ -158,6 +162,9 @@ export default {
         .catch((error) => {
           console.error('Erro ao buscar tarefas:', error);
         });
+    },
+    checkBox() {
+
     },
     searchTasks() {
       this.currentPage = 1;
