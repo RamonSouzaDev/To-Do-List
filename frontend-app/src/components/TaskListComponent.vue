@@ -26,6 +26,8 @@
           <button class="btn-add custom-mark-all-as-complete" @click="markAllAsCompleted">Marcar Todas como Concluído</button>
 
           <button class="btn-add custom-mark-all-as-incompleted" @click="markAllAsIncompleted">Marcar Todas como Incompleto</button>
+
+          <button class="btn-delete custom-delete-selected" @click="deleteSelectedTasks()">Excluir selecionadas</button>
         </div>
         <br>
         <confirm-delete-modal :show="showModal" :task-to-delete="taskToDelete" @confirm-delete="confirmDelete"
@@ -44,7 +46,7 @@
           <tbody>
             <tr v-for="task in tasks" :key="task.id">
               <td class="table-th-customize">
-                <input class="input-checkbox" type="checkbox" v-model="task.id" @change="checkBox(task)">
+                <input class="input-checkbox" type="checkbox" v-model="task.isSelected">
               </td>
               <td>{{ task.title }}</td>
               <td>{{ task.completed ? 'Sim' : 'Não' }}</td>
@@ -63,6 +65,7 @@
               </td>
             </tr>
           </tbody>
+          
         </table>
       </div>
         <br>
@@ -91,6 +94,7 @@ export default {
       currentPage: 1,
       showModal: false,
       taskToDelete: null,
+      selectedTasks: [],
     };
   },
   methods: {
@@ -163,8 +167,32 @@ export default {
           console.error('Erro ao buscar tarefas:', error);
         });
     },
-    checkBox() {
+    checkBox(task) {
+      if (this.selectedTasks.includes(task.id)) {
+        this.selectedTasks = this.selectedTasks.filter(id => id !== task.id);
+      } else {
+        console.log(task.id)
+        this.selectedTasks.push(task.id);
+      }
+    },
+    deleteSelectedTasks() {
+      const selectedTasks = this.tasks.filter(task => task.isSelected);
 
+      this.selectedTasks = selectedTasks;
+
+      const token = localStorage.getItem('token');
+      axios.post('http://127.0.0.1:8000/api/tasks/delete-multiple', this.selectedTasks, {
+        headers: {
+          'Authorization': 'Bearer ' + token,
+        },
+      })
+        .then((response) => {
+          console.log('As Tarefas selecionadas foram excluídas com sucesso!', response.data);
+          this.fetchTasks(1);
+        })
+        .catch((error) => {
+          console.error('Erro ao excluir tarefas selecionadas:', error);
+        });
     },
     searchTasks() {
       this.currentPage = 1;

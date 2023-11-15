@@ -212,4 +212,23 @@ class TaskControllerTest extends TestCase
         $response->assertDownload();
     }
 
+    /**
+     * Testa a exclusão por selecionadas.
+     * 
+     * @return void
+     * @covers TaskController@deleteMultiple
+     */
+    public function testeDeleteMultipleTasks()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user, 'api');
+
+        $teste = Task::factory(20)->create()->toArray();
+        dd($teste);
+
+
+        $response = $this->post('/api/tasks/delete-multiple', $teste);
+    }
+
 }
