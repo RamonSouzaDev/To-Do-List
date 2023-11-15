@@ -20,12 +20,12 @@ class TaskController extends Controller
     public function index(Request $request): JsonResponse
     {
         $query = Task::with('user');
-        
+
         if ($request->has('search')) {
             $search = $request->input('search');
             $query->where('title', 'like', "%$search%");
         }
-        
+
         $tasks = $query->paginate(10);
         return response()->json($tasks, 200);
     }
@@ -110,4 +110,24 @@ class TaskController extends Controller
         return ExcelExportHelper::exportToExcel($tasks, TaskExport::class, 'tarefas.xlsx');
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function deleteMultiple(Request $request): JsonResponse
+    {
+        $tasks = $request->all();
+
+        if (!is_array($tasks) || empty($tasks)) {
+            return response()->json(['message' => 'Nenhuma tarefa foi informada'], 400);
+        }
+
+        $taskIds = array_column($tasks, 'id');
+
+        foreach ($tasks as $task) {
+            Task::whereIn('id', $taskIds)->delete();
+        }
+
+        return response()->json(['message' => 'Tarefas excluídas com sucesso'], 200);
+    }
 }

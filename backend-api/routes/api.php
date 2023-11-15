@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
+use Laravel\Telescope\Telescope;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,7 @@ use App\Http\Controllers\TaskController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 
 Route::post('/register', 'App\Http\Controllers\Auth\RegisterController@store');
 Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');
@@ -31,6 +33,6 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/export-excel', 'App\Http\Controllers\TaskController@exportExcel')->name('tasks.export-excel');
         Route::post('/mark-all-as-completed', 'App\Http\Controllers\TaskController@markAllAsCompleted');
         Route::post('/mark-all-as-incompleted', 'App\Http\Controllers\TaskController@markAllAsIncompleted');
+        Route::post('/delete-multiple', 'App\Http\Controllers\TaskController@deleteMultiple');
     });
-
 });

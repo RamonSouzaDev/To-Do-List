@@ -308,7 +308,9 @@ body {
 
 .custom-button,
 .custom-export,
-.custom-mark-all-as-complete
+.custom-mark-all-as-complete,
+.custom-mark-all-as-incompleted,
+.custom-delete-selected
 {
   margin-left: 10px;
 }
@@ -348,6 +350,30 @@ body {
   border-radius: 4px;
   margin-top: 6px;
   margin-bottom: 16px;
+}
+
+.btn-delete {
+  background-color: #b30036;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .custom-delete-selected {
+    width: 100%;
+    max-width: 200px;
+    background-color: #b30036;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right:20%;
+    left:-10%;
+    position: relative;
+  }
 }
 
 .custom-textarea {
@@ -656,6 +682,7 @@ h2 {
 
 .btn-add,
 .btn-register-task,
+.custom-delete-selected,
 .btn-export {
   margin-top: 10px;
 }
@@ -674,6 +701,7 @@ h2 {
 @media (max-width: 767px) {
   .btn-export,
   .btn-register-task,
+  .custom-delete-selected,
   .btn-add {
     width: 100%; 
     margin-right: 0;
