@@ -7,8 +7,8 @@
                 </div>
                 <div class="footer-links">
                     <ul>
-                        <li><a href="/contato">WhatsApp : (11) 9 6652-4351</a></li>
-                        <li><a href="/contato">E-mail : dwmom@hotmail.com</a></li>
+                        <li><a href="https://wa.me/5511966524351" target="_blank">WhatsApp : (11) 9 6652-4351</a></li>
+                        <li><a href="mailto:dwmom@hotmail.com">E-mail : dwmom@hotmail.com</a></li>
                     </ul>
                 </div>
             </div>

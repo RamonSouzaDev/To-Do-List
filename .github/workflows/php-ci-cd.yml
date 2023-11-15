@@ -1,0 +1,30 @@
+name: PHP CI/CD
+
+on:
+  push:
+    branches:
+      - backend
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        extensions: mbstring, pdo_mysql, exif, pcntl, bcmath, gd, sockets, zip
+
+    - name: Install Dependencies
+      run: |
+        composer install --no-scripts --no-progress --prefer-dist
+
+    - name: Copy .env
+      run: cp .env.example .env
+
+    - name: Run PHPUnit
+      run: vendor/bin/phpunit
