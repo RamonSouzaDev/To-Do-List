@@ -34,6 +34,9 @@ jobs:
     - name: Generate Key for Testing
       run: php backend-api/artisan key:generate --env=testing
 
+    - name: Generate Passport
+      run: php backend-api/artisan passport:install
+
     - name: Directory Permissions
       run: chmod -R 777 backend-api/storage backend-api/bootstrap/cache
 
