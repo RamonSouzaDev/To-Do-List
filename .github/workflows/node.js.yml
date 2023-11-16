@@ -25,6 +25,7 @@ jobs:
     - name: Install Dependencies
       run: |
         npm install -g @vue/cli@5.0.8
+        cd frontend-app
         npm install
 
     - name: Build Application
