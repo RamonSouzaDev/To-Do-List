@@ -213,5 +213,44 @@ class TaskControllerTest extends TestCase
         $response->assertDownload();
     }
 
+    /**
+     * Testa a exclusão de várias tarefas.
+     *
+     * @return void
+     * @covers TaskController@deleteMultipleTask
+     */
+    public function testDeleteMultipleTask()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'api');
 
+        
+        $tasks = Task::factory(20)->create();
+
+        $taskIds = $tasks->pluck('id')->toArray();
+
+        $response = $this->post("/api/tasks/delete-multiple", ['tasks' => $taskIds]);
+
+        foreach ($taskIds as $taskId) {
+            $this->assertDatabaseMissing('tasks', [['id' => $taskId]]);
+        }
+
+        $response->assertStatus(200);
+    }
+
+    /**
+     * Testa a exclusão de várias tarefas sem informar tarefas.
+     *
+     * @return void
+     * @covers TaskController@deleteMultipleTask
+     */
+    public function testDeleteMultipleTaskWithoutTasks()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'api');
+
+        $response = $this->post("/api/tasks/delete-multiple", []);
+
+        $response->assertStatus(400)->assertJson(['message' => 'Nenhuma tarefa foi informada']);
+    }
 }
