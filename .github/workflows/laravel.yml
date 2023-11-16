@@ -19,8 +19,8 @@ jobs:
       with:
         php-version: '8.1'
 
-    - name: Copy .env
-      run: php -r "file_exists('backend-api/.env') || copy('backend-api/.env.example', 'backend-api/.env');"
+    - name: Copy .env.testing
+      run: php -r "file_exists('backend-api/.env') || copy('backend-api/.env.testing', 'backend-api/.env');"
 
     - name: Install Composer Dependencies
       run: |
@@ -47,6 +47,9 @@ jobs:
 
     - name: Debug .env.testing in Testing
       run: cat backend-api/.env.testing
+
+    - name: Debug Laravel Configuration
+      run: php backend-api/artisan config:dump
 
     - name: Run Migrations
       run: php backend-api/artisan migrate --env=testing
