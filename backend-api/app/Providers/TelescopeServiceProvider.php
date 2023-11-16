@@ -14,7 +14,10 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
      */
     public function register(): void
     {
-        // Telescope::night();
+        // Disable Telescope in the testing environment
+        if ($this->app->environment('testing')) {
+            return;
+        }
 
         $this->hideSensitiveRequestDetails();
 
@@ -24,12 +27,13 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
             }
 
             return $entry->isReportableException() ||
-                   $entry->isFailedRequest() ||
-                   $entry->isFailedJob() ||
-                   $entry->isScheduledTask() ||
-                   $entry->hasMonitoredTag();
+                $entry->isFailedRequest() ||
+                $entry->isFailedJob() ||
+                $entry->isScheduledTask() ||
+                $entry->hasMonitoredTag();
         });
     }
+
 
     /**
      * Prevent sensitive request details from being logged by Telescope.
