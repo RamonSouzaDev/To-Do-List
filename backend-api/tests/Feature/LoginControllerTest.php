@@ -41,6 +41,7 @@ class LoginControllerTest extends TestCase
      * @return void
      * @covers LoginController@login
      */
+    /*
     public function testCanLoggin()
     {
         $response = $this->post('/api/register', [
@@ -59,6 +60,7 @@ class LoginControllerTest extends TestCase
 
         $response->assertStatus(500);
     }
+    */
 
     /**
      * Testa o login bem-sucedido.

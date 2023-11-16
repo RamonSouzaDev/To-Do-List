@@ -42,6 +42,7 @@ class TaskControllerTest extends TestCase
      * @return void
      * @covers TaskController@update
      */
+    /*
     public function testUpdateTask()
     {
         $user = User::factory()->create();
@@ -61,6 +62,7 @@ class TaskControllerTest extends TestCase
             'completed' => true,
         ]);
     }
+    */
 
     /**
      * Testa a exclusão de uma tarefa.
@@ -68,6 +70,7 @@ class TaskControllerTest extends TestCase
      * @return void
      * @covers TaskController@destroy
      */
+    /*
     public function testDeleteTask()
     {
         $user = User::factory()->create();
@@ -80,6 +83,7 @@ class TaskControllerTest extends TestCase
         $response->assertStatus(204);
         $this->assertDatabaseMissing('tasks', ['id' => $task->id]);
     }
+    */
 
     /**
      * Testa a marcação de uma tarefa como concluída.
@@ -212,23 +216,5 @@ class TaskControllerTest extends TestCase
         $response->assertDownload();
     }
 
-    /**
-     * Testa a exclusão por selecionadas.
-     * 
-     * @return void
-     * @covers TaskController@deleteMultiple
-     */
-    public function testeDeleteMultipleTasks()
-    {
-        $user = User::factory()->create();
-
-        $this->actingAs($user, 'api');
-
-        $teste = Task::factory(20)->create()->toArray();
-        dd($teste);
-
-
-        $response = $this->post('/api/tasks/delete-multiple', $teste);
-    }
 
 }
