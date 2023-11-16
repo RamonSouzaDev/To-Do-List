@@ -49,7 +49,7 @@ jobs:
       run: cat backend-api/.env.testing
 
     - name: Debug Laravel Configuration
-      run: php backend-api/artisan config:dump
+      run: php backend-api/artisan config:env
 
     - name: Run Migrations
       run: php backend-api/artisan migrate --env=testing
