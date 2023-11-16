@@ -114,19 +114,17 @@ class TaskController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function deleteMultiple(Request $request): JsonResponse
+    public function deleteMultipleTask(Request $request): JsonResponse
     {
         $tasks = $request->all();
 
-        if (!is_array($tasks) || empty($tasks)) {
+        if (!$tasks) {
             return response()->json(['message' => 'Nenhuma tarefa foi informada'], 400);
         }
-
+        
         $taskIds = array_column($tasks, 'id');
 
-        foreach ($tasks as $task) {
-            Task::whereIn('id', $taskIds)->delete();
-        }
+        Task::whereIn('id', $taskIds)->delete();
 
         return response()->json(['message' => 'Tarefas excluídas com sucesso'], 200);
     }

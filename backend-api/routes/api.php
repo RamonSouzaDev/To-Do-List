@@ -27,12 +27,14 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
     
     Route::group(['prefix' => '/tasks'], function () {
-        Route::apiResource('', TaskController::class);
+        Route::apiResource('', TaskController::class)->parameters([
+            '' => 'task',
+        ]);
         Route::put('/{task}/complete', 'App\Http\Controllers\TaskController@markAsCompleted');
         Route::put('/{task}/incompleted', 'App\Http\Controllers\TaskController@markAsIncompleted');
         Route::post('/export-excel', 'App\Http\Controllers\TaskController@exportExcel')->name('tasks.export-excel');
         Route::post('/mark-all-as-completed', 'App\Http\Controllers\TaskController@markAllAsCompleted');
         Route::post('/mark-all-as-incompleted', 'App\Http\Controllers\TaskController@markAllAsIncompleted');
-        Route::post('/delete-multiple', 'App\Http\Controllers\TaskController@deleteMultiple');
+        Route::post('/delete-multiple', 'App\Http\Controllers\TaskController@deleteMultipleTask');
     });
 });
