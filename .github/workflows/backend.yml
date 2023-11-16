@@ -1,0 +1,64 @@
+name: Laravel
+
+on:
+  push:
+    branches: [ "backend" ]
+  pull_request:
+    branches: [ "backend" ]
+
+jobs:
+  laravel-tests:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+      with:
+        php-version: '8.1'
+
+    - name: Copy .env.testing
+      run: php -r "file_exists('backend-api/.env') || copy('backend-api/.env.testing', 'backend-api/.env');"
+
+    - name: Install Composer Dependencies
+      run: |
+        cd backend-api
+        composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+        composer dump-autoload --optimize
+
+    - name: Generate key
+      run: php backend-api/artisan key:generate
+
+    - name: Generate Key for Testing
+      run: php backend-api/artisan key:generate --env=testing
+
+    - name: Directory Permissions
+      run: chmod -R 777 backend-api/storage backend-api/bootstrap/cache
+
+    - name: Create Database
+      run: |
+        mkdir -p backend-api/database
+        touch backend-api/database/database.sqlite
+
+    - name: Debug .env in Testing
+      run: cat backend-api/.env
+
+    - name: Debug .env.testing in Testing
+      run: cat backend-api/.env.testing
+
+    - name: Run Migrations
+      run: php backend-api/artisan migrate --env=testing
+
+    - name: Seed Database in Testing Environment
+      run: php backend-api/artisan db:seed --env=testing
+
+    - name: Generate Passport
+      run: php backend-api/artisan passport:install --env=testing
+
+    - name: Execute tests (Unit and Feature tests) via PHPUnit
+      env:
+        DB_CONNECTION: sqlite
+        DB_DATABASE: backend-api/database/database.sqlite
+      run: backend-api/vendor/bin/phpunit backend-api/tests
