@@ -48,14 +48,14 @@ jobs:
     - name: Debug .env.testing in Testing
       run: cat backend-api/.env.testing
 
-    - name: Generate Passport
-      run: php backend-api/artisan passport:install --env=testing
-
     - name: Run Migrations
       run: php backend-api/artisan migrate --env=testing
 
     - name: Seed Database in Testing Environment
       run: php backend-api/artisan db:seed --env=testing
+
+    - name: Generate Passport
+      run: php backend-api/artisan passport:install --env=testing
 
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
