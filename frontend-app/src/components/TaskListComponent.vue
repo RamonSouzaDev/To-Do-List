@@ -27,7 +27,7 @@
 
           <button class="btn-add custom-mark-all-as-incompleted" @click="markAllAsIncompleted">Marcar Todas como Incompleto</button>
 
-          <button class="btn-delete custom-delete-selected" @click="deleteSelectedTasks()">Excluir selecionadas</button>
+          <button class="btn-add custom-mark-all-as-incompleted" @click="deleteSelectedTasks()">Excluir selecionadas</button>
         </div>
         <br>
         <confirm-delete-modal :show="showModal" :task-to-delete="taskToDelete" @confirm-delete="confirmDelete"

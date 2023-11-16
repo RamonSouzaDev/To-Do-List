@@ -37,4 +37,12 @@ jobs:
         fi
 
     - name: Test Application
-      run: npm test
+      run: |
+        # Verificar o diretório de trabalho atual novamente
+        if [ -d "frontend-app" ]; then
+          cd frontend-app
+          npm test
+        else
+          echo "O diretório frontend-app não foi encontrado para os testes."
+          exit 1
+        fi
