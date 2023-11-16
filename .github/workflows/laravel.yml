@@ -20,7 +20,7 @@ jobs:
         php-version: '8.1'
 
     - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      run: php -r "file_exists('backend-api/.env') || copy('backend-api/.env.example', 'backend-api/.env');"
 
     - name: Install Composer Dependencies
       run: |
