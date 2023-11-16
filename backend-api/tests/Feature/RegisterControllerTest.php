@@ -6,7 +6,7 @@ use Tests\TestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class RegisterTest extends TestCase
+class RegisterControllerTest extends TestCase
 {
     use DatabaseMigrations;
 
