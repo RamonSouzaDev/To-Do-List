@@ -224,11 +224,9 @@ class TaskControllerTest extends TestCase
 
         $this->actingAs($user, 'api');
 
-        $teste = Task::factory(20)->create()->toArray();
-        dd($teste);
-
-
-        $response = $this->post('/api/tasks/delete-multiple', $teste);
+        //$teste = Task::factory(20)->create()->toArray();
+        //dd($teste);
+        //$response = $this->post('/api/tasks/delete-multiple', $teste);
     }
 
 }
