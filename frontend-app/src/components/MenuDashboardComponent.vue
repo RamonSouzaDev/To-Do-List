@@ -14,7 +14,7 @@
             <img src="../assets/logo.png" alt="Logo Empresa" class="profile-image">
             <div class="nav-header">
                 <div class="nav-title">
-                    
+
                     <a v-if="user" class="nav-link">Bem-vindo, {{ user.name }}</a>
                 </div>
             </div>
@@ -35,6 +35,7 @@
             </div>
         </div>
     </body>
+
     </html>
 </template>
   
