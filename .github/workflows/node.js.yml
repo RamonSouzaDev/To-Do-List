@@ -22,14 +22,19 @@ jobs:
       with:
         node-version: '14'
 
-    - name: Install Dependencies
+    - name: Install Dependencies and Build
       run: |
         npm install -g @vue/cli@5.0.8
-        cd frontend-app
-        npm install
 
-    - name: Build Application
-      run: npm run build
+        # Verificar o diretório de trabalho atual
+        if [ -d "frontend-app" ]; then
+          cd frontend-app
+          npm install
+          npm run build
+        else
+          echo "O diretório frontend-app não foi encontrado."
+          exit 1
+        fi
 
     - name: Test Application
       run: npm test
