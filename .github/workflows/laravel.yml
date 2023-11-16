@@ -49,7 +49,7 @@ jobs:
       run: cat backend-api/.env.testing
 
     - name: Generate Passport
-      run: php backend-api/artisan passport:install
+      run: php backend-api/artisan passport:install --env=testing
 
     - name: Run Migrations
       run: php backend-api/artisan migrate --env=testing
