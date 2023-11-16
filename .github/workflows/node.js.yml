@@ -37,4 +37,6 @@ jobs:
         fi
 
     - name: Test Application
-      run: npm test
+      run: 
+        cd frontend-app
+        npm test
