@@ -13,7 +13,8 @@ class UserTest extends TestCase
 
     /**
      * Testa se um usuário pode ser criado e possui relacionamento com tarefas.
-     *
+     * @covers \App\Models\Task::user
+     * @covers \App\Models\User::tasks
      * @return void
      */
     public function testUserCreationAndTaskRelation()

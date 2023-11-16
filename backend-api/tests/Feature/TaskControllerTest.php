@@ -42,7 +42,6 @@ class TaskControllerTest extends TestCase
      * @return void
      * @covers TaskController@update
      */
-    /*
     public function testUpdateTask()
     {
         $user = User::factory()->create();
@@ -50,7 +49,7 @@ class TaskControllerTest extends TestCase
 
         $task = Task::factory()->create();
 
-        $response = $this->put("/api/tasks/{$task->id}", [
+        $response = $this->patch("/api/tasks/{$task->id}", [  // Use PATCH em vez de PUT
             'title' => 'Tarefa Atualizada',
             'completed' => true,
         ]);
@@ -62,7 +61,7 @@ class TaskControllerTest extends TestCase
             'completed' => true,
         ]);
     }
-    */
+    
 
     /**
      * Testa a exclusão de uma tarefa.
@@ -70,7 +69,6 @@ class TaskControllerTest extends TestCase
      * @return void
      * @covers TaskController@destroy
      */
-    /*
     public function testDeleteTask()
     {
         $user = User::factory()->create();
@@ -83,7 +81,6 @@ class TaskControllerTest extends TestCase
         $response->assertStatus(204);
         $this->assertDatabaseMissing('tasks', ['id' => $task->id]);
     }
-    */
 
     /**
      * Testa a marcação de uma tarefa como concluída.
