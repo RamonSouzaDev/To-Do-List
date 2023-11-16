@@ -54,6 +54,9 @@ jobs:
     - name: Seed Database in Testing Environment
       run: php backend-api/artisan db:seed --env=testing
 
+    - name: Generate Passport
+      run: php backend-api/artisan passport:install --env=testing
+
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         DB_CONNECTION: sqlite
