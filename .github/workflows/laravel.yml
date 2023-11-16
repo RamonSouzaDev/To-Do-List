@@ -39,6 +39,18 @@ jobs:
         mkdir -p backend-api/database
         touch backend-api/database/database.sqlite
 
+    - name: Debug .env in Testing
+      run: cat backend-api/.env
+
+    - name: Debug .env.testing in Testing
+      run: cat backend-api/.env.testing
+
+    - name: Run Migrations
+      run: php backend-api/artisan migrate --env=testing
+
+    - name: Seed Database in Testing Environment
+      run: php backend-api/artisan db:seed --env=testing
+
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         DB_CONNECTION: sqlite
