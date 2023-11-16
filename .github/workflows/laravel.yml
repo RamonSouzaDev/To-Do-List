@@ -43,4 +43,4 @@ jobs:
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: backend-api/database/database.sqlite
-      run: backend-api/vendor/bin/phpunit
+      run: backend-api/vendor/bin/phpunit backend-api/tests
