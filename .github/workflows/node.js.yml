@@ -1,0 +1,34 @@
+name: Vue.js CI/CD
+
+on:
+  push:
+    branches:
+      - frontend
+  pull_request:
+    branches:
+      - frontend
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'
+
+    - name: Install Dependencies
+      run: |
+        npm install -g @vue/cli@5.0.8
+        npm install
+
+    - name: Build Application
+      run: npm run build
+
+    - name: Test Application
+      run: npm test
