@@ -24,6 +24,7 @@ jobs:
 
     - name: Install Composer Dependencies
       run: |
+        cd backend-api
         composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
         composer dump-autoload --optimize
 
