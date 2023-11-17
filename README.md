@@ -7,6 +7,9 @@
 
 - 📫 Como chegar até mim **dwmom@hotmail.com**
 
+
+🧩 Acabei me empolgando e desenvolvi, mesmo após a data de entrega. 
+🧩
 <h3 align="left">Vamos fazer networking:</h3>
 <p align="left">
 <a href="https://linkedin.com/in/https://www.linkedin.com/in/ramon-mendes-b44456164/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/ramon-mendes-b44456164/" height="30" width="40" /></a>
