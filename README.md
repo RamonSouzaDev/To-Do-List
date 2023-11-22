@@ -49,7 +49,7 @@ cd "nome do projeto"
 
 **Testes Unitários** 💡
 
-1. Execute o comando  ./vendor/bin/phpunit
+1. Entre no container de backend e Execute o comando  ./vendor/bin/phpunit --coverage-html coverage
 
 ![image](https://github.com/RamonSouzaDev/To-Do-List/assets/47437727/8ac379e9-6cd2-461a-a9b4-129b8bc0adb1)
 
