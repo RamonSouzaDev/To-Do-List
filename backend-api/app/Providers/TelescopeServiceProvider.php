@@ -22,6 +22,10 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
             return;
         }
 
+        if ($this->app->environment('testing')) {
+            return;
+        }
+
         $this->hideSensitiveRequestDetails();
 
         Telescope::filter(function (IncomingEntry $entry) {
